@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Đặt món - Đom đóm quán</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/order.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="logo.png" alt="Đom đóm quán" width="150">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Trang chủ</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">Giới thiệu</a></li>
+          <li class="nav-item"><a class="nav-link" href="news.html">Tin tức</a></li>
+          <li class="nav-item"><a class="nav-link" href="menu.html">Thực đơn</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Liên hệ</a></li>
+          <li class="nav-item"><a class="nav-link" href="cart.html">🛒 Giỏ hàng</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <button id="loginBtn" class="btn btn-primary">Đăng nhập</button>
+
+  <div class="order-container">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="order-box">
+            <div class="order-header">
+              <h2>Đặt món: <span id="itemName" class="item-name">...</span></h2>
+              <div id="itemImage" class="item-image">
+                <!-- Item image will be loaded here -->
+              </div>
+            </div>
+
+            <form id="orderForm" class="order-form">
+              <!-- Quantity & Size -->
+              <div class="form-section">
+                <h4>Thông tin món</h4>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label for="quantity" class="form-label">Số lượng</label>
+                      <div class="quantity-control">
+                        <button type="button" class="quantity-btn" id="decreaseQty">-</button>
+                        <input type="number" class="form-control" id="quantity" value="1" min="1" max="10">
+                        <button type="button" class="quantity-btn" id="increaseQty">+</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label class="form-label">Kích cỡ</label>
+                      <div class="size-options">
+                        <label class="size-option">
+                          <input type="radio" name="size" value="S">
+                          <span class="size-label">Nhỏ</span>
+                          <span class="size-price">+0đ</span>
+                        </label>
+                        <label class="size-option active">
+                          <input type="radio" name="size" value="M" checked>
+                          <span class="size-label">Vừa</span>
+                          <span class="size-price">+0đ</span>
+                        </label>
+                        <label class="size-option">
+                          <input type="radio" name="size" value="L">
+                          <span class="size-label">Lớn</span>
+                          <span class="size-price">+5.000đ</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Customer Information -->
+              <div class="form-section">
+                <h4>Thông tin giao hàng</h4>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label for="name" class="form-label">Tên người nhận *</label>
+                      <input type="text" class="form-control" id="name" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label for="phone" class="form-label">Số điện thoại *</label>
+                      <input type="tel" class="form-control" id="phone" required>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label for="address" class="form-label">Địa chỉ giao hàng *</label>
+                  <textarea class="form-control" id="address" rows="2" required
+                    placeholder="Số nhà, đường, phường/xã, quận/huyện, thành phố"></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="note" class="form-label">Ghi chú (tuỳ chọn)</label>
+                  <input type="text" class="form-control" id="note"
+                    placeholder="Ví dụ: Không đường, ít đá, giao giờ...">
+                </div>
+              </div>
+
+              <!-- Order Summary -->
+              <div class="form-section">
+                <h4>Tóm tắt đơn hàng</h4>
+                <div class="order-summary">
+                  <div class="summary-item">
+                    <span>Đơn giá:</span>
+                    <span id="basePrice">0đ</span>
+                  </div>
+                  <div class="summary-item">
+                    <span>Phí size:</span>
+                    <span id="sizePrice">0đ</span>
+                  </div>
+                  <div class="summary-item">
+                    <span>Số lượng:</span>
+                    <span id="summaryQuantity">1</span>
+                  </div>
+                  <div class="summary-divider"></div>
+                  <div class="summary-total">
+                    <span>Tổng cộng:</span>
+                    <span id="totalPrice" class="total-price">0đ</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="form-actions">
+                <button type="submit" class="btn btn-order btn-lg">
+                  <span class="btn-text">Thêm vào giỏ hàng</span>
+                  <span class="btn-loading" style="display: none;">
+                    <span class="spinner-border spinner-border-sm" role="status"></span>
+                    Đang xử lý...
+                  </span>
+                </button>
+                <a href="menu.html" class="btn btn-secondary btn-lg">← Quay về thực đơn</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 Đom đóm quán</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/order.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,316 @@
+/* css/contact.css */
+body {
+  font-family: "Segoe UI", sans-serif;
+  background-color: #fffaf7;
+  color: #333;
+}
+
+.navbar {
+  background-color: #ff9900;
+}
+
+.navbar-brand,
+.nav-link {
+  color: #fff !important;
+  font-size: 20px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.nav-link:hover {
+  color: black !important;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  color: #ff7043 !important;
+}
+
+.contact-hero {
+  background: linear-gradient(rgba(78, 52, 46, 0.8), rgba(78, 52, 46, 0.8)),
+    url("../database/AnhDoAn/BanhTranBo.jpg");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 100px 0;
+  text-align: center;
+}
+
+.contact-hero h1 {
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.contact-hero .lead {
+  font-size: 1.4rem;
+  opacity: 0.9;
+}
+
+.contact-info-section {
+  padding: 80px 0;
+  background: white;
+}
+
+.info-card {
+  background: #fffaf7;
+  padding: 40px 30px;
+  border-radius: 15px;
+  text-align: center;
+  height: 100%;
+  border: 2px solid transparent;
+  transition: all 0.3s;
+}
+
+.info-card:hover {
+  border-color: #ff7043;
+  transform: translateY(-5px);
+}
+
+.info-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.info-card h4 {
+  color: #4e342e;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.info-card p {
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.contact-form-section {
+  padding: 80px 0;
+  background: #fffaf7;
+}
+
+.contact-form-section h2 {
+  color: #4e342e;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.contact-form {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.form-label {
+  font-weight: 600;
+  color: #4e342e;
+  margin-bottom: 8px;
+}
+
+.form-control,
+.form-select {
+  border: 2px solid #e9ecef;
+  border-radius: 10px;
+  padding: 12px 15px;
+  transition: all 0.3s;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #ff7043;
+  box-shadow: 0 0 0 0.2rem rgba(255, 112, 67, 0.25);
+}
+
+.btn-send {
+  background-color: #ff7043;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 40px;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: background 0.2s;
+  width: 100%;
+}
+
+.btn-send:hover {
+  background-color: #4e342e;
+  color: #fff;
+}
+
+.map-section h2 {
+  color: #4e342e;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.map-placeholder {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.map-image img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.map-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(78, 52, 46, 0.9);
+  color: white;
+  padding: 20px;
+}
+
+.map-overlay h5 {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.map-overlay p {
+  margin: 5px 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.business-hours {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+.business-hours h4 {
+  color: #4e342e;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.hour-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.hour-item:last-child {
+  border-bottom: none;
+}
+
+.hour-item span:first-child {
+  color: #666;
+}
+
+.hour-item span:last-child {
+  color: #4e342e;
+  font-weight: 600;
+}
+
+.faq-section {
+  padding: 80px 0;
+  background: white;
+}
+
+.faq-section h2 {
+  color: #4e342e;
+  font-weight: bold;
+  font-size: 2.5rem;
+}
+
+.faq-item {
+  background: #fffaf7;
+  padding: 25px;
+  border-radius: 12px;
+  border-left: 4px solid #ff7043;
+  height: 100%;
+}
+
+.faq-item h5 {
+  color: #4e342e;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.faq-item p {
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+footer {
+  background-color: #4e342e;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 40px;
+}
+
+#loginBtn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  border-radius: 25px;
+  background: #ff7043;
+  color: #fff;
+  border: none;
+  padding: 10px 22px;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: background 0.2s;
+}
+
+#loginBtn:hover {
+  background: #4e342e;
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contact-hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .contact-hero .lead {
+    font-size: 1.2rem;
+  }
+
+  .contact-form-section h2,
+  .faq-section h2 {
+    font-size: 2rem;
+  }
+
+  .map-overlay {
+    position: relative;
+    background: #4e342e;
+  }
+
+  .info-card,
+  .faq-item {
+    margin-bottom: 20px;
+  }
+}
+
+/* Animation */
+.info-card,
+.faq-item,
+.contact-form {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

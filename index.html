@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Trang chủ - Đom đóm quán</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="logo.png" alt="Đom đóm quán" width="150">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Trang chủ</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">Giới thiệu</a></li>
+          <li class="nav-item"><a class="nav-link" href="news.html">Tin tức</a></li>
+          <li class="nav-item"><a class="nav-link" href="menu.html">Thực đơn</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Liên hệ</a></li>
+          <li class="nav-item"><a class="nav-link" href="cart.html">🛒 Giỏ hàng</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <button id="loginBtn" class="btn btn-primary">Đăng nhập</button>
+
+  <section class="hero-section">
+    <div class="overlay"></div>
+    <div class="container hero-content">
+      <h1>Chào mừng đến với Đom đóm quán</h1>
+      <p>Khơi nguồn cảm hứng từ từng tách cà phê - Không gian lý tưởng cho CEO và doanh nhân.</p>
+      <a href="menu.html" class="btn btn-cta">Khám phá thực đơn</a>
+    </div>
+  </section>
+
+  <section class="best-seller-section">
+    <div class="container">
+      <h3>Best Seller</h3>
+      <div class="row justify-content-center">
+        <div class="col-md-4 mb-4">
+          <div class="card best-seller-card border-warning">
+            <img src="database/AnhDoAn/BanhTranBo.jpg" class="card-img-top" alt="Bánh tráng bơ">
+            <div class="card-body text-center">
+              <h5 class="card-title">Bánh tráng bơ</h5>
+              <span class="badge bg-warning text-dark mb-2">Best Seller</span>
+              <p class="card-text text-danger fw-bold">25.000đ</p>
+              <a href="order.html?item=banhtrangbo" class="btn btn-order w-100">Đặt món</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card best-seller-card border-warning">
+            <img src="database/AnhDoUong/tra_dao_cam_sa.png" class="card-img-top" alt="Trà đào cam sả">
+            <div class="card-body text-center">
+              <h5 class="card-title">Trà đào cam sả</h5>
+              <span class="badge bg-warning text-dark mb-2">Best Seller</span>
+              <p class="card-text text-danger fw-bold">32.000đ</p>
+              <a href="order.html?item=tradaocamsa" class="btn btn-order w-100">Đặt món</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="card best-seller-card border-warning">
+            <img src="database/AnhDoUong/tra_sua_tran_chau_duong_den.png" class="card-img-top"
+              alt="Trà sữa trân châu đường đen">
+            <div class="card-body text-center">
+              <h5 class="card-title">Trà sữa trân châu đường đen</h5>
+              <span class="badge bg-warning text-dark mb-2">Best Seller</span>
+              <p class="card-text text-danger fw-bold">35.000đ</p>
+              <a href="order.html?item=trasuatranchauduongden" class="btn btn-order w-100">Đặt món</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="intro-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6 mb-4 mb-md-0">
+          <h2>Về Đom đóm quán</h2>
+          <p>Đom đóm quán là nơi hội tụ hương vị cà phê truyền thống và hiện đại, mang đến cho bạn trải nghiệm thư giãn
+            tuyệt vời trong không gian ấm cúng, chuyên nghiệp và đẳng cấp dành cho doanh nhân.</p>
+          <a href="about.html" class="btn btn-outline-dark">Tìm hiểu thêm</a>
+        </div>
+        <div class="col-md-6">
+          <img src="database/AnhDoAn/BanhTranBo.jpg" alt="Không gian quán" class="img-fluid rounded shadow">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 Đom đóm quán</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/index.js"></script>
+</body>
+
+</html>

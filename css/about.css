@@ -1,0 +1,209 @@
+/* css/about.css */
+body {
+  font-family: "Segoe UI", sans-serif;
+  background-color: #fffaf7;
+  color: #333;
+}
+
+.navbar {
+  background-color: #ff9900;
+}
+
+.navbar-brand,
+.nav-link {
+  color: #fff !important;
+  font-size: 20px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.nav-link:hover {
+  color: black !important;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  color: #ff7043 !important;
+}
+
+.about-hero {
+  background: linear-gradient(rgba(78, 52, 46, 0.8), rgba(78, 52, 46, 0.8)),
+    url("../database/AnhDoAn/BanhTranBo.jpg");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 100px 0;
+  text-align: center;
+}
+
+.about-hero h1 {
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.about-hero .lead {
+  font-size: 1.4rem;
+  opacity: 0.9;
+}
+
+.mission-section {
+  padding: 80px 0;
+  background: #fff;
+}
+
+.mission-section h2 {
+  color: #4e342e;
+  font-weight: bold;
+  margin-bottom: 30px;
+  font-size: 2.5rem;
+}
+
+.mission-section p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.mission-section img {
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.history-section {
+  padding: 80px 0;
+  background: #fffaf7;
+}
+
+.history-section h2 {
+  color: #4e342e;
+  font-weight: bold;
+  font-size: 2.5rem;
+}
+
+.history-card {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  height: 100%;
+  transition: transform 0.3s;
+}
+
+.history-card:hover {
+  transform: translateY(-5px);
+}
+
+.year {
+  background: #ff7043;
+  color: white;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0 auto 20px;
+}
+
+.history-card h4 {
+  color: #4e342e;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.history-card p {
+  color: #666;
+  line-height: 1.6;
+}
+
+.values-section {
+  padding: 80px 0;
+  background: white;
+}
+
+.values-section h2 {
+  color: #4e342e;
+  font-weight: bold;
+  font-size: 2.5rem;
+}
+
+.value-card {
+  background: #fffaf7;
+  padding: 40px 30px;
+  border-radius: 15px;
+  text-align: center;
+  height: 100%;
+  border: 2px solid transparent;
+  transition: all 0.3s;
+}
+
+.value-card:hover {
+  border-color: #ff7043;
+  transform: translateY(-5px);
+}
+
+.value-icon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.value-card h4 {
+  color: #4e342e;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.value-card p {
+  color: #666;
+  line-height: 1.6;
+}
+
+footer {
+  background-color: #4e342e;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 40px;
+}
+
+#loginBtn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  border-radius: 25px;
+  background: #ff7043;
+  color: #fff;
+  border: none;
+  padding: 10px 22px;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: background 0.2s;
+}
+
+#loginBtn:hover {
+  background: #4e342e;
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .about-hero .lead {
+    font-size: 1.2rem;
+  }
+
+  .mission-section h2,
+  .history-section h2,
+  .values-section h2 {
+    font-size: 2rem;
+  }
+}

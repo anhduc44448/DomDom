@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Liên hệ - Đom đóm quán</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/contact.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="logo.png" alt="Đom đóm quán" width="150">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Trang chủ</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">Giới thiệu</a></li>
+          <li class="nav-item"><a class="nav-link" href="news.html">Tin tức</a></li>
+          <li class="nav-item"><a class="nav-link" href="menu.html">Thực đơn</a></li>
+          <li class="nav-item"><a class="nav-link active" href="contact.html">Liên hệ</a></li>
+          <li class="nav-item"><a class="nav-link" href="cart.html">🛒 Giỏ hàng</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <button id="loginBtn" class="btn btn-primary">Đăng nhập</button>
+
+  <section class="contact-hero">
+    <div class="container">
+      <h1 class="display-4 fw-bold">Liên hệ với chúng tôi</h1>
+      <p class="lead">Chúng tôi luôn sẵn sàng lắng nghe và hỗ trợ bạn</p>
+    </div>
+  </section>
+
+  <section class="contact-info-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mb-4">
+          <div class="info-card">
+            <div class="info-icon">📍</div>
+            <h4>Địa chỉ</h4>
+            <p>123 Đường ABC, Quận 1<br>Thành phố Hồ Chí Minh</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="info-card">
+            <div class="info-icon">📞</div>
+            <h4>Điện thoại</h4>
+            <p>+84 28 1234 5678<br>+84 90 123 4567</p>
+          </div>
+        </div>
+        <div class="col-md-4 mb-4">
+          <div class="info-card">
+            <div class="info-icon">✉️</div>
+            <h4>Email</h4>
+            <p>info@domdomquan.com<br>support@domdomquan.com</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-form-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h2>Gửi tin nhắn cho chúng tôi</h2>
+          <p class="text-muted">Hãy để lại thông tin, chúng tôi sẽ phản hồi trong thời gian sớm nhất</p>
+
+          <form id="contactForm" class="contact-form">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="name" class="form-label">Họ và tên *</label>
+                <input type="text" class="form-control" id="name" required>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="phone" class="form-label">Số điện thoại *</label>
+                <input type="tel" class="form-control" id="phone" required>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email *</label>
+              <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+              <label for="subject" class="form-label">Chủ đề *</label>
+              <select class="form-select" id="subject" required>
+                <option value="">Chọn chủ đề</option>
+                <option value="order">Đặt hàng & Giao hàng</option>
+                <option value="quality">Chất lượng sản phẩm</option>
+                <option value="feedback">Góp ý & Phản hồi</option>
+                <option value="partnership">Hợp tác kinh doanh</option>
+                <option value="other">Khác</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="message" class="form-label">Nội dung tin nhắn *</label>
+              <textarea class="form-control" id="message" rows="5" required
+                placeholder="Hãy chia sẻ với chúng tôi..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-send">Gửi tin nhắn</button>
+          </form>
+        </div>
+
+        <div class="col-md-6">
+          <div class="map-section">
+            <h2>Đến thăm chúng tôi</h2>
+            <div class="map-placeholder">
+              <div class="map-image">
+                <img src="database/AnhDoAn/BanhTranBo.jpg" alt="Bản đồ Đom đóm quán" class="img-fluid rounded">
+              </div>
+              <div class="map-overlay">
+                <h5>Đom đóm quán - Chi nhánh Quận 1</h5>
+                <p>🕒 Mở cửa: 7:00 - 22:00 hàng ngày</p>
+                <p>📍 123 Đường ABC, Quận 1, TP.HCM</p>
+              </div>
+            </div>
+
+            <div class="business-hours mt-4">
+              <h4>Giờ mở cửa</h4>
+              <div class="hours-list">
+                <div class="hour-item">
+                  <span>Thứ 2 - Thứ 6:</span>
+                  <span>7:00 - 22:00</span>
+                </div>
+                <div class="hour-item">
+                  <span>Thứ 7:</span>
+                  <span>7:00 - 23:00</span>
+                </div>
+                <div class="hour-item">
+                  <span>Chủ nhật:</span>
+                  <span>8:00 - 22:00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq-section">
+    <div class="container">
+      <h2 class="text-center mb-5">Câu hỏi thường gặp</h2>
+      <div class="row">
+        <div class="col-md-6 mb-4">
+          <div class="faq-item">
+            <h5>Đom đóm quán có giao hàng tận nơi không?</h5>
+            <p>Có, chúng tôi giao hàng trong phạm vi 10km với đơn tối thiểu 50.000đ. Phí giao hàng từ 10.000 - 20.000đ
+              tùy khoảng cách.</p>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="faq-item">
+            <h5>Thời gian giao hàng trong bao lâu?</h5>
+            <p>Thời gian giao hàng từ 30-45 phút tùy khu vực và tình trạng đơn hàng. Đơn vào giờ cao điểm có thể lâu
+              hơn.</p>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="faq-item">
+            <h5>Có thể đặt bàn trước không?</h5>
+            <p>Có, bạn có thể đặt bàn trước qua hotline hoặc website. Đặc biệt khuyến khích đặt trước vào cuối tuần.</p>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="faq-item">
+            <h5>Chấp nhận thanh toán qua</h5>
+            <p>Chúng tôi chấp nhận tiền mặt, chuyển khoản ngân hàng, ví điện tử (Momo, ZaloPay) và thẻ tín dụng.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 Đom đóm quán</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/contact.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Thực đơn - Đom đóm quán</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/menu.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="logo.png" alt="Đom đóm quán" width="150">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Trang chủ</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">Giới thiệu</a></li>
+          <li class="nav-item"><a class="nav-link" href="news.html">Tin tức</a></li>
+          <li class="nav-item"><a class="nav-link active" href="menu.html">Thực đơn</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Liên hệ</a></li>
+          <li class="nav-item"><a class="nav-link" href="cart.html">🛒 Giỏ hàng</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <button id="loginBtn" class="btn btn-primary">Đăng nhập</button>
+
+  <section class="menu-hero">
+    <div class="container">
+      <h1 class="display-4 fw-bold">Thực đơn Đom đóm quán</h1>
+      <p class="lead">Khám phá hương vị độc đáo từ các món ăn và thức uống đặc biệt</p>
+    </div>
+  </section>
+
+  <section class="menu-section">
+    <div class="container">
+      <!-- Filter Buttons -->
+      <div class="menu-filter text-center mb-5">
+        <button class="btn filter-btn active" data-filter="all">Tất cả</button>
+        <button class="btn filter-btn" data-filter="do-an">Đồ ăn</button>
+        <button class="btn filter-btn" data-filter="do-uong">Thức uống</button>
+      </div>
+
+      <!-- Đồ ăn -->
+      <div class="menu-category" data-category="do-an">
+        <h3 class="category-title">🍽️ Đồ ăn</h3>
+        <div class="row g-4">
+          <!-- Bánh tráng bơ -->
+          <div class="col-md-3 col-sm-6 menu-item" data-category="do-an">
+            <div class="card h-100 shadow-sm">
+              <img src="database/AnhDoAn/BanhTranBo.jpg" class="card-img-top" alt="Bánh tráng bơ">
+              <div class="card-body">
+                <h5 class="card-title">Bánh tráng bơ</h5>
+                <p class="card-text text-danger fw-bold">25.000đ</p>
+                <a href="order.html?item=banhtrangbo" class="btn btn-order w-100">Đặt món</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bánh tráng kẹp dẻo -->
+          <div class="col-md-3 col-sm-6 menu-item" data-category="do-an">
+            <div class="card h-100 shadow-sm">
+              <img src="database/AnhDoAn/BanhTrangKepDeo.jpg" class="card-img-top" alt="Bánh tráng kẹp dẻo">
+              <div class="card-body">
+                <h5 class="card-title">Bánh tráng kẹp dẻo</h5>
+                <p class="card-text text-danger fw-bold">28.000đ</p>
+                <a href="order.html?item=banhtrangkepdeo" class="btn btn-order w-100">Đặt món</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bánh tráng trộn Sài Gòn -->
+          <div class="col-md-3 col-sm-6 menu-item" data-category="do-an">
+            <div class="card h-100 shadow-sm">
+              <img src="database/AnhDoAn/BanhTranTronSaiGon.jpg" class="card-img-top" alt="Bánh tráng trộn Sài Gòn">
+              <div class="card-body">
+                <h5 class="card-title">Bánh tráng trộn Sài Gòn</h5>
+                <p class="card-text text-danger fw-bold">30.000đ</p>
+                <a href="order.html?item=banhtrangtronsaigon" class="btn btn-order w-100">Đặt món</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Khô bò trộn -->
+          <div class="col-md-3 col-sm-6 menu-item" data-category="do-an">
+            <div class="card h-100 shadow-sm">
+              <img src="database/AnhDoAn/BoKhoTron.jpg" class="card-img-top" alt="Khô bò trộn">
+              <div class="card-body">
+                <h5 class="card-title">Khô bò trộn</h5>
+                <p class="card-text text-danger fw-bold">32.000đ</p>
+                <a href="order.html?item=khobotron" class="btn btn-order w-100">Đặt món</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Da heo trộn -->
+          <div class="col-md-3 col-sm-6 menu-item" data-category="do-an">
+            <div class="card h-100 shadow-sm">
+              <img src="database/AnhDoAn/DaHeoTron.jpg" class="card-img-top" alt="Da heo trộn">
+              <div class="card-body">
+                <h5 class="card-title">Da heo trộn</h5>
+                <p class="card-text text-danger fw-bold">27.000đ</p>
+                <a href="order.html?item=daheotron" class="btn btn-order w-100">Đặt món</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gỏi xoài trộn -->
+          <div class="col-md-3 col-sm-6 menu-item" data-category="do-an">
+            <div class="card h-100 shadow-sm">
+              <img src="database/AnhDoAn/GoiXoaiTron.jpg" class="card-img-top" alt="Gỏi xoài trộn">
+              <div class="card-body">
+                <h5 class="card-title">Gỏi xoài trộn</h5>
+                <p class="card-text text-danger fw-bold">26.000đ</p>
+                <a href="order.html?item=goixoaitron" class="btn btn-order w-100">Đặt món</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mít trộn -->
+          <div class="col-md-3 col-sm-6 menu-item" data-category="do-an">
+            <div class="card h-100 shadow-sm">
+              <img src="database/AnhDoAn/MitTron.jpg" class="card-img-top" alt="Mít trộn">
+              <div class="card-body">
+                <h5 class="card-title">Mít trộn</h5>
+                <p class="card-text text-danger fw-bold">25.000đ</p>
+                <a href="order.html?item=mittron" class="btn btn-order w-100">Đặt món</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ốc đinh trộn dừa -->
+          <div class="col-md-3 col-sm-6 menu-item" data-category="do-an">
+            <div class="card h-100 shadow-sm">
+              <img src="database/AnhDoAn/OcDinhTronDua.jpg" class="card-img-top" alt="Ốc đinh trộn dừa">
+              <div class="card-body">
+                <h5 class="card-title">Ốc đinh trộn dừa</h5>
+                <p class="card-text text-danger fw-bold">35.000đ</p>
+                <a href="order.html?item=ocdinhtrondua" class="btn btn-order w-100">Đặt món</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ốc thường trộn dừa -->
+          <div class="col-md-3 col-sm-6 menu-item" data-category="do-an">
+            <div class="card h-100 shadow-sm">
+              <img src="database/AnhDoAn/OcThuongTronDua.jpg" class="card-img-top" alt="Ốc thường trộn dừa">
+              <div class="card-body">
+                <h5 class="card-title">Ốc thường trộn dừa</h5>
+                <p class="card-text text-danger fw-bold">33.000đ</p>
+                <a href="order.html?item=octhuongtrondua" class="btn btn-order w-100">Đặt món</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ram cuốn cải -->
+          <div class="col-md-3 col-sm-6 menu-item" data-category="do-an">
+            <div class="card h-100 shadow-sm">
+              <img src="database/AnhDoAn/RomCuonCai.jpg" class="card-img-top" alt="Ram cuốn cải">
+              <div class="card-body">
+                <h5 class="card-title">Ram cuốn cải</h5>
+                <p class="card-text text-danger fw-bold">28.000đ</p>
+                <a href="order.html?item=ramcuoncai" class="btn btn-order w-100">Đặt món</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thức uống -->
+      <div class="menu-category" data-category="do-uong">
+        <h3 class="category-title">🥤 Thức uống</h3>
+        <div class="row g-4">
+          <!-- Ca cao đá -->
+          <div class="col-md-3 col-sm-6 menu-item" data-category="do-uong">
+            <div class="card h-100 shadow-sm">
+              <img src="database/AnhDoUong/CaCaoDa.png" class="card-img-top" alt="Ca cao đá">
+              <div class="card-body">
+                <h5 class="card-title">Ca cao đá</h5>
+                <p class="card-text text-danger fw-bold">30.000đ</p>
+                <a href="order.html?item=cacaoda" class="btn btn-order w-100">Đặt món</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Matcha đá xay -->
+          <div class="col-md-3 col-sm-6 menu-item" data-category="do-uong">
+            <div class="card h-100 shadow-sm">
+              <img src="database/AnhDoUong/matchaDaXay.png" class="card-img-top" alt="Matcha đá xay">
+              <div class="card-body">
+                <h5 class="card-title">Matcha đá xay</h5>
+                <p class="card-text text-danger fw-bold">38.000đ</p>
+                <a href="order.html?item=matchadaxay" class="btn btn-order w-100">Đặt món</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nước ép ổi -->
+          <div class="col-md-3 col-sm-6 menu-item" data-category="do-uong">
+            <div class="card h-100 shadow-sm">
+              <img src="database/AnhDoUong/nuoc_ep_oi.png" class="card-img-top" alt="Nước ép ổi">
+              <div class="card-body">
+                <h5 class="card-title">Nước ép ổi</h5>
+                <p class="card-text text-danger fw-bold">28.000đ</p>
+                <a href="order.html?item=nuocepoi" class="btn btn-order w-100">Đặt món</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nước chanh -->
+          <div class="col-md-3 col-sm-6 menu-item" data-category="do-uong">
+            <div class="card h-100 shadow-sm">
+              <img src="database/AnhDoUong/NuocChanhTuoi.png" class="card-img-top" alt="Nước chanh">
+              <div class="card-body">
+                <h5 class="card-title">Nước chanh</h5>
+                <p class="card-text text-danger fw-bold">22.000đ</p>
+                <a href="order.html?item=nuocchanh" class="btn btn-order w-100">Đặt món</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nước ép cà rốt -->
+          <div class="col-md-3 col-sm-6 menu-item" data-category="do-uong">
+            <div class="card h-100 shadow-sm">
+              <img src="database/AnhDoUong/NuocEpCaRot.png" class="card-img-top" alt="Nước ép cà rốt">
+              <div class="card-body">
+                <h5 class="card-title">Nước ép cà rốt</h5>
+                <p class="card-text text-danger fw-bold">28.000đ</p>
+                <a href="order.html?item=nuocepcarot" class="btn btn-order w-100">Đặt món</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sữa tươi trân châu đường đen -->
+          <div class="col-md-3 col-sm-6 menu-item" data-category="do-uong">
+            <div class="card h-100 shadow-sm">
+              <img src="database/AnhDoUong/sua_tuoi_tran_chau_duong_dene.png" class="card-img-top"
+                alt="Sữa tươi trân châu đường đen">
+              <div class="card-body">
+                <h5 class="card-title">Sữa tươi trân châu đường đen</h5>
+                <p class="card-text text-danger fw-bold">35.000đ</p>
+                <a href="order.html?item=suatuoitranchauduongden" class="btn btn-order w-100">Đặt món</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Trà đào cam sả -->
+          <div class="col-md-3 col-sm-6 menu-item" data-category="do-uong">
+            <div class="card h-100 shadow-sm">
+              <img src="database/AnhDoUong/tra_dao_cam_sa.png" class="card-img-top" alt="Trà đào cam sả">
+              <div class="card-body">
+                <h5 class="card-title">Trà đào cam sả</h5>
+                <p class="card-text text-danger fw-bold">32.000đ</p>
+                <a href="order.html?item=tradaocamsa" class="btn btn-order w-100">Đặt món</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Trà sữa trân châu đường đen -->
+          <div class="col-md-3 col-sm-6 menu-item" data-category="do-uong">
+            <div class="card h-100 shadow-sm">
+              <img src="database/AnhDoUong/tra_sua_tran_chau_duong_den.png" class="card-img-top"
+                alt="Trà sữa trân châu đường đen">
+              <div class="card-body">
+                <h5 class="card-title">Trà sữa trân châu đường đen</h5>
+                <p class="card-text text-danger fw-bold">35.000đ</p>
+                <a href="order.html?item=trasuatranchauduongden" class="btn btn-order w-100">Đặt món</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 Đom đóm quán</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/menu.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,164 @@
+/* css/index.css */
+body {
+  font-family: "Segoe UI", sans-serif;
+  background-color: #fefefe;
+  color: #333;
+}
+
+.navbar {
+  background-color: #ff9900;
+}
+
+.navbar-brand,
+.nav-link {
+  color: #fff !important;
+  font-size: 20px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.nav-link:hover {
+  color: black !important;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  color: #ff7043 !important;
+}
+
+.hero-section {
+  background: url("../database/AnhDoAn/BanhTranBo.jpg") no-repeat center center;
+  background-size: cover;
+  color: white;
+  padding: 120px 0 80px;
+  text-align: center;
+  position: relative;
+}
+
+.hero-section .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(78, 52, 46, 0.55);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-section h1 {
+  font-size: 3.2rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+  margin-bottom: 20px;
+}
+
+.hero-section p {
+  font-size: 1.3rem;
+  margin-bottom: 32px;
+}
+
+.btn-cta {
+  background: #ff7043;
+  color: #fff;
+  border-radius: 25px;
+  padding: 12px 32px;
+  font-weight: 500;
+  font-size: 1.1rem;
+  border: none;
+  transition: background 0.2s;
+}
+
+.btn-cta:hover {
+  background: #4e342e;
+  color: #fff;
+}
+
+.best-seller-section {
+  background: #fffaf7;
+  padding: 40px 0 20px;
+}
+
+.best-seller-section h3 {
+  color: #ff7043;
+  font-weight: bold;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.best-seller-card {
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+  transition: transform 0.2s;
+}
+
+.best-seller-card:hover {
+  transform: translateY(-5px);
+}
+
+.best-seller-card img {
+  height: 120px;
+  object-fit: cover;
+  border-radius: 16px 16px 0 0;
+}
+
+.btn-order {
+  background-color: #ff7043;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 8px 0;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.btn-order:hover {
+  background-color: #4e342e;
+  color: #fff;
+}
+
+.intro-section {
+  padding: 60px 0 30px;
+}
+
+.intro-section h2 {
+  color: #4e342e;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.intro-section p {
+  font-size: 1.15rem;
+  margin-bottom: 18px;
+}
+
+footer {
+  background-color: #4e342e;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 40px;
+}
+
+#loginBtn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  border-radius: 25px;
+  background: #ff7043;
+  color: #fff;
+  border: none;
+  padding: 10px 22px;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: background 0.2s;
+}
+
+#loginBtn:hover {
+  background: #4e342e;
+  color: #fff;
+}

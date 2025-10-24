@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Giỏ hàng - Đom đóm quán</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/cart.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <img src="logo.png" alt="Đom đóm quán" width="150">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Trang chủ</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">Giới thiệu</a></li>
+          <li class="nav-item"><a class="nav-link" href="news.html">Tin tức</a></li>
+          <li class="nav-item"><a class="nav-link" href="menu.html">Thực đơn</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Liên hệ</a></li>
+          <li class="nav-item"><a class="nav-link active" href="cart.html">🛒 Giỏ hàng</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <button id="loginBtn" class="btn btn-primary">Đăng nhập</button>
+
+  <div class="container cart-container">
+    <h2 class="cart-title">Giỏ hàng của bạn</h2>
+
+    <div id="cartList" class="cart-list">
+      <!-- Giỏ hàng sẽ được hiển thị ở đây -->
+    </div>
+
+    <div class="cart-summary">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="total-section">
+            <h4>Tổng cộng: <span id="totalAmount">0đ</span></h4>
+            <p class="text-muted">Phí vận chuyển sẽ được tính khi thanh toán</p>
+          </div>
+        </div>
+        <div class="col-md-6 text-end">
+          <button class="btn btn-order btn-lg" id="confirmOrderBtn">Xác nhận đặt hàng</button>
+          <a href="menu.html" class="btn btn-secondary btn-lg ms-3">← Tiếp tục mua hàng</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="emptyCart" class="empty-cart text-center">
+      <div class="empty-icon">🛒</div>
+      <h3>Giỏ hàng của bạn đang trống</h3>
+      <p>Hãy khám phá thực đơn và thêm món ăn ngon vào giỏ hàng!</p>
+      <a href="menu.html" class="btn btn-order">Khám phá thực đơn</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2024 Đom đóm quán</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+
+</html>

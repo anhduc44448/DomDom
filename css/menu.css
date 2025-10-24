@@ -1,0 +1,323 @@
+/* css/menu.css */
+body {
+  font-family: "Segoe UI", sans-serif;
+  background-color: #fffaf7;
+  color: #333;
+}
+
+.navbar {
+  background-color: #ff9900;
+}
+
+.navbar-brand,
+.nav-link {
+  color: #fff !important;
+  font-size: 20px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.nav-link:hover {
+  color: black !important;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  color: #ff7043 !important;
+}
+
+.menu-hero {
+  background: linear-gradient(rgba(78, 52, 46, 0.8), rgba(78, 52, 46, 0.8)),
+    url("../database/AnhDoAn/BanhTranBo.jpg");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 100px 0;
+  text-align: center;
+}
+
+.menu-hero h1 {
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.menu-hero .lead {
+  font-size: 1.4rem;
+  opacity: 0.9;
+}
+
+.menu-section {
+  padding: 60px 0;
+}
+
+.menu-filter {
+  margin-bottom: 50px;
+}
+
+.filter-btn {
+  background: white;
+  color: #4e342e;
+  border: 2px solid #ff7043;
+  border-radius: 25px;
+  padding: 10px 25px;
+  margin: 0 10px;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: #ff7043;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.menu-category {
+  margin-bottom: 60px;
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.5s ease-in-out;
+}
+
+.menu-category.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  height: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.category-title {
+  color: #4e342e;
+  border-bottom: 3px solid #ff7043;
+  padding-bottom: 15px;
+  margin-bottom: 40px;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.menu-item {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.4s ease-in-out;
+}
+
+.menu-item.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+  height: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.card {
+  border: none;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.card:hover {
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  transform: translateY(-8px);
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+  border-radius: 16px 16px 0 0;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .card-img-top {
+  transform: scale(1.05);
+}
+
+.card-body {
+  padding: 20px;
+  text-align: center;
+}
+
+.card-title {
+  color: #4e342e;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-text {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.btn-order {
+  background-color: #ff7043;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 0;
+  font-weight: 500;
+  transition: all 0.3s;
+  width: 100%;
+}
+
+.btn-order:hover {
+  background-color: #4e342e;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.btn-order:active {
+  transform: translateY(0);
+}
+
+/* Quick order button styles */
+.quick-order-btn {
+  position: fixed;
+  bottom: 80px;
+  right: 24px;
+  z-index: 998;
+  background: #4e342e;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 12px 20px;
+  font-weight: 500;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s;
+}
+
+.quick-order-btn:hover {
+  background: #ff7043;
+  transform: translateY(-2px);
+}
+
+footer {
+  background-color: #4e342e;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 40px;
+}
+
+#loginBtn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  border-radius: 25px;
+  background: #ff7043;
+  color: #fff;
+  border: none;
+  padding: 10px 22px;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: background 0.2s;
+}
+
+#loginBtn:hover {
+  background: #4e342e;
+  color: #fff;
+}
+
+/* Loading animation */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* Search box */
+.search-box {
+  max-width: 400px;
+  margin: 0 auto 30px;
+}
+
+.search-box .form-control {
+  border-radius: 25px;
+  padding: 12px 20px;
+  border: 2px solid #e9ecef;
+  transition: all 0.3s;
+}
+
+.search-box .form-control:focus {
+  border-color: #ff7043;
+  box-shadow: 0 0 0 0.2rem rgba(255, 112, 67, 0.25);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .menu-hero h1 {
+    font-size: 2.5rem;
+  }
+
+  .menu-hero .lead {
+    font-size: 1.2rem;
+  }
+
+  .category-title {
+    font-size: 1.5rem;
+  }
+
+  .filter-btn {
+    margin: 5px;
+    padding: 8px 20px;
+  }
+
+  .card-img-top {
+    height: 150px;
+  }
+
+  .quick-order-btn {
+    bottom: 70px;
+    right: 15px;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Animation for menu items */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.menu-item {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Stagger animation for items */
+.menu-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.menu-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.menu-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.menu-item:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.menu-item:nth-child(5) {
+  animation-delay: 0.5s;
+}
+.menu-item:nth-child(6) {
+  animation-delay: 0.6s;
+}
+.menu-item:nth-child(7) {
+  animation-delay: 0.7s;
+}
+.menu-item:nth-child(8) {
+  animation-delay: 0.8s;
+}
