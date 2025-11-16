@@ -28,7 +28,7 @@ function handleLoginClick() {
   }
 }
 
-// Menu data with prices
+// Menu data với prices
 const menu = {
   banhtrangbo: {
     name: "Bánh tráng bơ",
@@ -268,39 +268,22 @@ function initOrderForm() {
   });
 }
 
-// Validate form
+// Validate form - CHỈ CÒN 2 TRƯỜNG BẮT BUỘC
 function validateForm() {
   const name = document.getElementById("name").value.trim();
-  const phone = document.getElementById("phone").value.trim();
-  const address = document.getElementById("address").value.trim();
+  const tableNumber = document.getElementById("tableNumber").value;
 
   if (!name) {
     alert("Vui lòng nhập tên người nhận");
     return false;
   }
 
-  if (!phone) {
-    alert("Vui lòng nhập số điện thoại");
-    return false;
-  }
-
-  if (!validatePhone(phone)) {
-    alert("Số điện thoại không hợp lệ");
-    return false;
-  }
-
-  if (!address) {
-    alert("Vui lòng nhập địa chỉ giao hàng");
+  if (!tableNumber) {
+    alert("Vui lòng chọn số bàn");
     return false;
   }
 
   return true;
-}
-
-// Validate phone number
-function validatePhone(phone) {
-  const re = /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
-  return re.test(phone.replace(/\s/g, ""));
 }
 
 // Add item to cart
@@ -324,8 +307,7 @@ function addToCart() {
     ),
     customer: {
       name: document.getElementById("name").value.trim(),
-      phone: document.getElementById("phone").value.trim(),
-      address: document.getElementById("address").value.trim(),
+      tableNumber: document.getElementById("tableNumber").value,
       note: document.getElementById("note").value.trim(),
     },
     addedAt: new Date().toISOString(),

@@ -86,7 +86,7 @@
 
               <!-- Customer Information -->
               <div class="form-section">
-                <h4>Thông tin giao hàng</h4>
+                <h4>Thông tin phục vụ</h4>
                 <div class="row">
                   <div class="col-md-6">
                     <div class="mb-3">
@@ -96,20 +96,30 @@
                   </div>
                   <div class="col-md-6">
                     <div class="mb-3">
-                      <label for="phone" class="form-label">Số điện thoại *</label>
-                      <input type="tel" class="form-control" id="phone" required>
+                      <label for="tableNumber" class="form-label">Số bàn *</label>
+                      <select class="form-select" id="tableNumber" required>
+                        <option value="">Chọn số bàn</option>
+                        <option value="1">Bàn 1</option>
+                        <option value="2">Bàn 2</option>
+                        <option value="3">Bàn 3</option>
+                        <option value="4">Bàn 4</option>
+                        <option value="5">Bàn 5</option>
+                        <option value="6">Bàn 6</option>
+                        <option value="7">Bàn 7</option>
+                        <option value="8">Bàn 8</option>
+                        <option value="9">Bàn 9</option>
+                        <option value="10">Bàn 10</option>
+                        <option value="vip1">VIP 1</option>
+                        <option value="vip2">VIP 2</option>
+                        <option value="vip3">VIP 3</option>
+                      </select>
                     </div>
                   </div>
                 </div>
                 <div class="mb-3">
-                  <label for="address" class="form-label">Địa chỉ giao hàng *</label>
-                  <textarea class="form-control" id="address" rows="2" required
-                    placeholder="Số nhà, đường, phường/xã, quận/huyện, thành phố"></textarea>
-                </div>
-                <div class="mb-3">
                   <label for="note" class="form-label">Ghi chú (tuỳ chọn)</label>
                   <input type="text" class="form-control" id="note"
-                    placeholder="Ví dụ: Không đường, ít đá, giao giờ...">
+                    placeholder="Ví dụ: Không đường, ít đá, không hành...">
                 </div>
               </div>
 
