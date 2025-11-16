@@ -1,7 +1,30 @@
-// js/menu.js
+// js/menu.js - HOÀN CHỈNH
+document.addEventListener("DOMContentLoaded", function () {
+  // Initialize all functionality
+  initLoginButton();
+  initCartCount();
+  initFilter();
+  initQuickOrder();
+  initQuickAddToCart();
+  initImageErrorHandling();
+});
+
+// Login functionality
+function initLoginButton() {
+  updateLoginButton();
+
+  const loginBtn = document.getElementById("loginBtn");
+  if (loginBtn) {
+    loginBtn.addEventListener("click", handleLoginClick);
+  }
+}
+
 function updateLoginButton() {
   const username = localStorage.getItem("username");
   const loginBtn = document.getElementById("loginBtn");
+
+  if (!loginBtn) return;
+
   if (username) {
     loginBtn.textContent = `👋 ${username} | Đăng xuất`;
     loginBtn.classList.remove("btn-primary");
@@ -15,23 +38,38 @@ function updateLoginButton() {
 
 function handleLoginClick() {
   const username = localStorage.getItem("username");
+
   if (username) {
     if (confirm("Bạn có chắc muốn đăng xuất không?")) {
       localStorage.removeItem("username");
       localStorage.removeItem("password");
+      localStorage.removeItem("isLoggedIn");
       alert("Đã đăng xuất thành công!");
       updateLoginButton();
+      updateCartCount();
     }
   } else {
-    window.location.href = "login.html";
+    window.location.href = "login.php";
+  }
+}
+
+// Cart functionality
+function initCartCount() {
+  updateCartCount();
+}
+
+function updateCartCount() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cartCount = document.getElementById("cartCount");
+
+  if (cartCount) {
+    cartCount.textContent = cart.length;
   }
 }
 
 // Filter functionality
 function initFilter() {
   const filterBtns = document.querySelectorAll(".filter-btn");
-  const menuItems = document.querySelectorAll(".menu-item");
-  const categories = document.querySelectorAll(".menu-category");
 
   filterBtns.forEach((btn) => {
     btn.addEventListener("click", function () {
@@ -40,36 +78,44 @@ function initFilter() {
       this.classList.add("active");
 
       const filter = this.getAttribute("data-filter");
-
-      // Filter items
-      menuItems.forEach((item) => {
-        const itemCategory = item.getAttribute("data-category");
-
-        if (filter === "all" || filter === itemCategory) {
-          item.classList.remove("hidden");
-        } else {
-          item.classList.add("hidden");
-        }
-      });
-
-      // Filter categories
-      categories.forEach((category) => {
-        const categoryType = category.getAttribute("data-category");
-        const hasVisibleItems = Array.from(
-          category.querySelectorAll(".menu-item")
-        ).some((item) => !item.classList.contains("hidden"));
-
-        if (filter === "all" || filter === categoryType) {
-          if (hasVisibleItems) {
-            category.classList.remove("hidden");
-          } else {
-            category.classList.add("hidden");
-          }
-        } else {
-          category.classList.add("hidden");
-        }
-      });
+      applyFilter(filter);
     });
+  });
+}
+
+function applyFilter(filter) {
+  const menuItems = document.querySelectorAll(".menu-item");
+  const categories = document.querySelectorAll(".menu-category");
+
+  // Filter items
+  menuItems.forEach((item) => {
+    const itemCategory = item.getAttribute("data-category");
+    const isVisible = filter === "all" || filter === itemCategory;
+
+    if (isVisible) {
+      item.classList.remove("hidden");
+    } else {
+      item.classList.add("hidden");
+    }
+  });
+
+  // Filter categories
+  categories.forEach((category) => {
+    const categoryType = category.getAttribute("data-category");
+    const categoryItems = category.querySelectorAll(".menu-item");
+    const hasVisibleItems = Array.from(categoryItems).some(
+      (item) => !item.classList.contains("hidden")
+    );
+
+    if (filter === "all" || filter === categoryType) {
+      if (hasVisibleItems) {
+        category.classList.remove("hidden");
+      } else {
+        category.classList.add("hidden");
+      }
+    } else {
+      category.classList.add("hidden");
+    }
   });
 }
 
@@ -83,157 +129,164 @@ function initQuickOrder() {
       if (localStorage.getItem("isLoggedIn") !== "true") {
         e.preventDefault();
         alert("Bạn cần đăng nhập để đặt món!");
-        window.location.href = "login.html";
+        window.location.href = "login.php";
         return;
       }
 
       // Add loading effect
-      const originalText = this.textContent;
-      this.textContent = "Đang xử lý...";
-      this.disabled = true;
-
-      setTimeout(() => {
-        this.textContent = originalText;
-        this.disabled = false;
-      }, 1000);
+      showButtonLoading(this);
     });
   });
 }
 
-// Search functionality
-function initSearch() {
-  // Create search box
-  const searchBox = document.createElement("div");
-  searchBox.className = "search-box";
-  searchBox.innerHTML = `
-        <input type="text" class="form-control" placeholder="🔍 Tìm kiếm món ăn..." id="menuSearch">
-    `;
+function showButtonLoading(button) {
+  const originalText = button.textContent;
+  button.textContent = "Đang xử lý...";
+  button.disabled = true;
 
-  const menuSection = document.querySelector(".menu-section .container");
-  menuSection.insertBefore(searchBox, menuSection.firstChild);
-
-  const searchInput = document.getElementById("menuSearch");
-
-  searchInput.addEventListener("input", function () {
-    const searchTerm = this.value.toLowerCase().trim();
-    const menuItems = document.querySelectorAll(".menu-item");
-    const categories = document.querySelectorAll(".menu-category");
-
-    let hasVisibleItems = false;
-
-    menuItems.forEach((item) => {
-      const itemName = item
-        .querySelector(".card-title")
-        .textContent.toLowerCase();
-      const itemCategory = item.getAttribute("data-category");
-
-      if (itemName.includes(searchTerm)) {
-        item.classList.remove("hidden");
-        hasVisibleItems = true;
-      } else {
-        item.classList.add("hidden");
-      }
-    });
-
-    // Show/hide categories based on visible items
-    categories.forEach((category) => {
-      const categoryType = category.getAttribute("data-category");
-      const categoryItems = category.querySelectorAll(".menu-item");
-      const hasVisibleCategoryItems = Array.from(categoryItems).some(
-        (item) => !item.classList.contains("hidden")
-      );
-
-      if (hasVisibleCategoryItems) {
-        category.classList.remove("hidden");
-      } else {
-        category.classList.add("hidden");
-      }
-    });
-
-    // Update filter buttons if searching
-    if (searchTerm) {
-      document.querySelectorAll(".filter-btn").forEach((btn) => {
-        btn.classList.remove("active");
-      });
-      document
-        .querySelector('.filter-btn[data-filter="all"]')
-        .classList.add("active");
-    }
-  });
+  setTimeout(() => {
+    button.textContent = originalText;
+    button.disabled = false;
+  }, 1000);
 }
 
-// Add to cart directly from menu
+// Quick add to cart functionality
 function initQuickAddToCart() {
   const menuItems = document.querySelectorAll(".menu-item");
 
   menuItems.forEach((item) => {
     const card = item.querySelector(".card");
+    let tapCount = 0;
+    let tapTimer;
 
-    card.addEventListener("dblclick", function () {
-      if (localStorage.getItem("isLoggedIn") !== "true") {
-        alert("Bạn cần đăng nhập để thêm vào giỏ hàng!");
-        return;
+    card.addEventListener("click", function (e) {
+      // Ignore clicks on order button
+      if (e.target.classList.contains("btn-order")) return;
+
+      tapCount++;
+
+      if (tapCount === 1) {
+        tapTimer = setTimeout(function () {
+          tapCount = 0;
+        }, 300);
+      } else if (tapCount === 2) {
+        clearTimeout(tapTimer);
+        tapCount = 0;
+        handleQuickAddToCart(this);
       }
-
-      const itemName = this.querySelector(".card-title").textContent;
-      const itemPrice = this.querySelector(".card-text").textContent;
-      const itemImage = this.querySelector(".card-img-top").src;
-
-      // Create quick cart item
-      const quickItem = {
-        name: itemName,
-        price: itemPrice,
-        img: itemImage,
-        quantity: 1,
-        size: "M",
-        customer: {
-          name: localStorage.getItem("username") || "Khách hàng",
-          phone: "",
-          address: "",
-          note: "Thêm nhanh từ menu",
-        },
-      };
-
-      // Add to cart
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      cart.push(quickItem);
-      localStorage.setItem("cart", JSON.stringify(cart));
-
-      // Show confirmation
-      showQuickAddNotification(itemName);
     });
   });
 }
 
+function handleQuickAddToCart(cardElement) {
+  // Check login
+  if (localStorage.getItem("isLoggedIn") !== "true") {
+    alert("Bạn cần đăng nhập để thêm vào giỏ hàng!");
+    return;
+  }
+
+  // Get item details
+  const itemName = cardElement.querySelector(".card-title").textContent;
+  const itemPrice = parseInt(
+    cardElement.querySelector(".card-text").textContent.replace(/[^\d]/g, "")
+  );
+  const itemImage = cardElement.querySelector(".card-img-top").src;
+
+  // Create cart item
+  const cartItem = {
+    name: itemName,
+    img: itemImage,
+    quantity: 1,
+    size: "M",
+    price: itemPrice,
+    total: itemPrice,
+    customer: {
+      name: localStorage.getItem("username") || "Khách hàng",
+      phone: "",
+      address: "",
+      note: "Thêm nhanh từ menu",
+    },
+    addedAt: new Date().toISOString(),
+  };
+
+  // Add to cart
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  cart.push(cartItem);
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  // Update UI
+  updateCartCount();
+  showQuickAddNotification(itemName);
+}
+
 function showQuickAddNotification(itemName) {
+  // Create notification element
   const notification = document.createElement("div");
   notification.className = "alert alert-success position-fixed";
   notification.style.cssText = `
         top: 20px;
-        right: 20px;
+        left: 50%;
+        transform: translateX(-50%);
         z-index: 1000;
-        min-width: 300px;
+        min-width: 280px;
+        text-align: center;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        transition: all 0.3s ease;
     `;
   notification.innerHTML = `
         ✅ Đã thêm <strong>${itemName}</strong> vào giỏ hàng!
-        <a href="cart.html" class="alert-link">Xem giỏ hàng</a>
     `;
 
   document.body.appendChild(notification);
 
+  // Auto remove after 2 seconds
   setTimeout(() => {
-    notification.remove();
-  }, 3000);
+    notification.style.opacity = "0";
+    notification.style.transform = "translateX(-50%) translateY(-20px)";
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.parentNode.removeChild(notification);
+      }
+    }, 300);
+  }, 2000);
 }
 
-// Initialize everything when DOM is loaded
-document.addEventListener("DOMContentLoaded", function () {
-  updateLoginButton();
-  document
-    .getElementById("loginBtn")
-    .addEventListener("click", handleLoginClick);
-  initFilter();
-  initQuickOrder();
-  initSearch();
-  initQuickAddToCart();
+// Image error handling
+function initImageErrorHandling() {
+  const images = document.querySelectorAll('img[loading="lazy"]');
+
+  images.forEach((img) => {
+    img.addEventListener("error", function () {
+      this.src = "database/AnhDoAn/BanhTranBo.jpg";
+    });
+
+    // Preload important images
+    if (img.getAttribute("src").includes("BanhTranBo")) {
+      const preloadLink = document.createElement("link");
+      preloadLink.rel = "preload";
+      preloadLink.as = "image";
+      preloadLink.href = img.getAttribute("src");
+      document.head.appendChild(preloadLink);
+    }
+  });
+}
+
+// Handle page visibility changes
+document.addEventListener("visibilitychange", function () {
+  if (!document.hidden) {
+    updateCartCount();
+  }
 });
+
+// Handle beforeunload for cleanup
+window.addEventListener("beforeunload", function () {
+  // Cleanup any pending timeouts or intervals if needed
+});
+
+// Export functions for global access (if needed)
+window.menuApp = {
+  updateLoginButton,
+  updateCartCount,
+  applyFilter,
+};

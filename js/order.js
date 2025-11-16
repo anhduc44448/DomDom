@@ -24,7 +24,7 @@ function handleLoginClick() {
       window.location.reload();
     }
   } else {
-    window.location.href = "login.html";
+    window.location.href = "login.php";
   }
 }
 
@@ -127,7 +127,7 @@ function initOrderPage() {
   // Check login status
   if (localStorage.getItem("isLoggedIn") !== "true") {
     alert("Bạn cần đăng nhập để đặt món!");
-    window.location.href = "login.html";
+    window.location.href = "login.php";
     return;
   }
 

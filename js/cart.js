@@ -24,7 +24,7 @@ function handleLoginClick() {
       window.location.reload();
     }
   } else {
-    window.location.href = "login.html";
+    window.location.href = "login.php";
   }
 }
 
@@ -161,7 +161,7 @@ function confirmOrder() {
 
   if (localStorage.getItem("isLoggedIn") !== "true") {
     alert("Bạn cần đăng nhập để đặt hàng!");
-    window.location.href = "login.html";
+    window.location.href = "login.php";
     return;
   }
 
