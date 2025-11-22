@@ -1,0 +1,121 @@
+-- =======================
+-- TẠO BẢNG
+-- =======================
+
+-- Bảng users
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    is_premium TINYINT(1) NOT NULL DEFAULT 0,
+    role VARCHAR(20) DEFAULT 'customer',
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Bảng categories
+CREATE TABLE IF NOT EXISTS categories (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    type VARCHAR(10) NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Bảng products
+CREATE TABLE IF NOT EXISTS products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    description TEXT,
+    price DECIMAL(10,2) NOT NULL,
+    image_path VARCHAR(500),
+    category_id INT,
+    is_available TINYINT(1) DEFAULT 1,
+    is_best_seller TINYINT(1) DEFAULT 0,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL
+);
+
+-- Bảng orders
+CREATE TABLE IF NOT EXISTS orders (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    customer_name VARCHAR(100) NOT NULL,
+    customer_phone VARCHAR(20) NOT NULL,
+    customer_address TEXT NOT NULL,
+    customer_note TEXT,
+    total_amount DECIMAL(10,2) NOT NULL,
+    status VARCHAR(20) DEFAULT 'pending',
+    order_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+);
+
+-- Bảng order_items
+CREATE TABLE IF NOT EXISTS order_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    order_id INT,
+    product_id INT,
+    product_name VARCHAR(255) NOT NULL,
+    quantity INT NOT NULL,
+    size VARCHAR(1) DEFAULT 'M',
+    unit_price DECIMAL(10,2) NOT NULL,
+    total_price DECIMAL(10,2) NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE SET NULL
+);
+
+-- =======================
+-- DỮ LIỆU MẪU
+-- =======================
+
+INSERT INTO categories (name, type) VALUES
+('Đồ ăn vặt', 'food'),
+('Trà sữa', 'drink'),
+('Cà phê', 'drink'),
+('Nước ép', 'drink'),
+('Sinh tố', 'drink');
+
+INSERT INTO users (username, password, email, is_premium, role) VALUES
+('admin', 'admin123', 'admin@domdomquan.com', 1, 'admin'),
+('staff1', 'staff123', 'staff1@domdomquan.com', 0, 'staff'),
+('customer1', 'password123', 'customer1@gmail.com', 0, 'customer'),
+('customer2', 'password123', 'customer2@gmail.com', 0, 'customer');
+
+INSERT INTO products (name, description, price, image_path, category_id, is_best_seller) VALUES
+('Bánh tráng bơ', 'Bánh tráng trộn với bơ thơm ngon', 25000, 'database/AnhDoAn/BanhTranBo.jpg', 1, 1),
+('Bánh tráng kẹp dẻo', 'Bánh tráng kẹp với các loại topping hấp dẫn', 28000, 'database/AnhDoAn/BanhTrangKepDeo.jpg', 1, 0),
+('Bánh tráng trộn Sài Gòn', 'Bánh tráng trộn theo phong cách Sài Gòn', 30000, 'database/AnhDoAn/BanhTranTronSaiGon.jpg', 1, 0),
+('Khô bò trộn', 'Khô bò dai ngon kết hợp với gia vị đặc biệt', 32000, 'database/AnhDoAn/BoKhoTron.jpg', 1, 0),
+('Da heo trộn', 'Da heo giòn sần sật với nước sốt chua ngọt', 27000, 'database/AnhDoAn/DaHeoTron.jpg', 1, 0),
+('Gỏi xoài trộn', 'Xoài xanh trộn với tôm khô và gia vị', 26000, 'database/AnhDoAn/GoiXoaiTron.jpg', 1, 0),
+('Mít trộn', 'Mít non trộn với gia vị đặc trưng', 25000, 'database/AnhDoAn/MitTron.jpg', 1, 0),
+('Ốc đinh trộn dừa', 'Ốc đinh tươi ngon trộn với dừa nạo', 35000, 'database/AnhDoAn/OcDinhTronDua.jpg', 1, 0),
+('Ốc thường trộn dừa', 'Ốc thường trộn dừa thơm ngon', 33000, 'database/AnhDoAn/OcThuongTronDua.jpg', 1, 0),
+('Ram cuốn cải', 'Ram giòn cuốn với rau cải tươi', 28000, 'database/AnhDoAn/RomCuonCai.jpg', 1, 0);
+
+INSERT INTO products (name, description, price, image_path, category_id, is_best_seller) VALUES
+('Trà đào cam sả', 'Trà đào kết hợp cam sả thơm ngon', 32000, 'database/AnhDoUong/tra_dao_cam_sa.png', 2, 1),
+('Trà sữa trân châu đường đen', 'Trà sữa thơm ngon với trân châu đường đen', 35000, 'database/AnhDoUong/tra_sua_tran_chau_duong_den.png', 2, 1),
+('Ca cao đá', 'Ca cao thơm ngon uống kèm đá', 30000, 'database/AnhDoUong/CaCaoDa.png', 3, 0),
+('Matcha đá xay', 'Matcha Nhật Bản xay cùng đá', 38000, 'database/AnhDoUong/matchaDaXay.png', 4, 0),
+('Nước ép ổi', 'Nước ép ổi tươi nguyên chất', 28000, 'database/AnhDoUong/nuoc_ep_oi.png', 4, 0),
+('Nước chanh', 'Nước chanh tươi mát lạnh', 22000, 'database/AnhDoUong/NuocChanhTuoi.png', 4, 0),
+('Nước ép cà rốt', 'Nước ép cà rốt tốt cho sức khỏe', 28000, 'database/AnhDoUong/NuocEpCaRot.png', 4, 0),
+('Sữa tươi trân châu đường đen', 'Sữa tươi kết hợp trân châu đường đen', 35000, 'database/AnhDoUong/sua_tuoi_tran_chau_duong_dene.png', 2, 0);
+
+INSERT INTO orders (user_id, customer_name, customer_phone, customer_address, total_amount, status) VALUES
+(3, 'Nguyễn Văn A', '0901234567', '123 Đường ABC, Quận 1, TP.HCM', 87000, 'pending'),
+(4, 'Trần Thị B', '0912345678', '456 Đường XYZ, Quận 2, TP.HCM', 125000, 'confirmed');
+
+INSERT INTO order_items (order_id, product_id, product_name, quantity, size, unit_price, total_price) VALUES
+(1, 1, 'Bánh tráng bơ', 2, 'M', 25000, 50000),
+(1, 11, 'Trà đào cam sả', 1, 'L', 32000, 37000),
+(2, 12, 'Trà sữa trân châu đường đen', 2, 'M', 35000, 70000),
+(2, 5, 'Da heo trộn', 2, 'M', 27000, 54000);
+
+-- INDEXES
+CREATE INDEX idx_products_category ON products(category_id);
+CREATE INDEX idx_products_best_seller ON products(is_best_seller);
+CREATE INDEX idx_orders_user ON orders(user_id);
+CREATE INDEX idx_orders_status ON orders(status);
+CREATE INDEX idx_order_items_order ON order_items(order_id);
+CREATE INDEX idx_users_role ON users(role);
