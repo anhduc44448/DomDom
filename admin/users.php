@@ -199,13 +199,18 @@ $stats = [
                                             <td>
                                                 <form method="POST" class="role-form">
                                                     <input type="hidden" name="user_id" value="<?php echo $user['id']; ?>">
-                                                    <select name="role" class="role-select role-<?php echo $user['role']; ?>" 
-                                                            <?php echo $user['id'] == $_SESSION['user_id'] ? 'disabled' : 'onchange="this.form.submit()"'; ?>>
+                                                    <select name="role" class="role-select role-<?php echo $user['role']; ?>"
+                                                            <?php echo $user['id'] == $_SESSION['user_id'] ? 'disabled' : ''; ?>>
                                                         <option value="customer" <?php echo $user['role'] == 'customer' ? 'selected' : ''; ?>>Khách hàng</option>
                                                         <option value="staff" <?php echo $user['role'] == 'staff' ? 'selected' : ''; ?>>Nhân viên</option>
                                                         <option value="admin" <?php echo $user['role'] == 'admin' ? 'selected' : ''; ?>>Quản trị</option>
                                                     </select>
-                                                    <button type="submit" name="update_role" class="d-none">Cập nhật</button>
+                                                    <?php if ($user['id'] != $_SESSION['user_id']): ?>
+                                                        <button type="submit" name="update_role" class="btn btn-success btn-sm update-btn" title="Cập nhật vai trò"
+                                                                onclick="return confirm('Bạn có chắc muốn cập nhật vai trò của <?php echo htmlspecialchars($user['username']); ?>?')">
+                                                            <i class="fas fa-check"></i> Cập nhật
+                                                        </button>
+                                                    <?php endif; ?>
                                                 </form>
                                             </td>
                                             <td>
@@ -281,7 +286,15 @@ $stats = [
 
         /* Role Select */
         .role-form {
-            min-width: 120px;
+            min-width: 150px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .update-btn {
+            margin-left: auto;
+            white-space: nowrap;
         }
 
         .role-select {

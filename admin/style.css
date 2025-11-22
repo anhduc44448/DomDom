@@ -833,7 +833,15 @@ body {
 
 /* Status Forms */
 .status-form {
-  min-width: 150px;
+  min-width: 200px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.update-btn {
+  margin-left: auto;
+  white-space: nowrap;
 }
 
 .status-select {

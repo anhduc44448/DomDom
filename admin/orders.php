@@ -291,14 +291,17 @@ $stats = [
                                             <td>
                                                 <form method="POST" class="status-form">
                                                     <input type="hidden" name="order_id" value="<?php echo $order['id']; ?>">
-                                                    <select name="status" class="status-select status-<?php echo $order['status']; ?>" onchange="this.form.submit()">
+                                                    <select name="status" class="status-select status-<?php echo $order['status']; ?>">
                                                         <option value="pending" <?php echo $order['status'] == 'pending' ? 'selected' : ''; ?>>Chờ xử lý</option>
                                                         <option value="confirmed" <?php echo $order['status'] == 'confirmed' ? 'selected' : ''; ?>>Đã xác nhận</option>
                                                         <option value="delivering" <?php echo $order['status'] == 'delivering' ? 'selected' : ''; ?>>Đang giao</option>
                                                         <option value="completed" <?php echo $order['status'] == 'completed' ? 'selected' : ''; ?>>Hoàn thành</option>
                                                         <option value="cancelled" <?php echo $order['status'] == 'cancelled' ? 'selected' : ''; ?>>Đã hủy</option>
                                                     </select>
-                                                    <button type="submit" name="update_status" class="d-none">Cập nhật</button>
+                                                    <button type="submit" name="update_status" class="btn btn-success btn-sm update-btn" title="Cập nhật trạng thái"
+                                                            onclick="return confirm('Bạn có chắc muốn cập nhật trạng thái đơn hàng #<?php echo $order['id']; ?>?')">
+                                                        <i class="fas fa-check"></i> Cập nhật
+                                                    </button>
                                                 </form>
                                             </td>
                                             <td>
@@ -336,13 +339,6 @@ $stats = [
         </div>
     </div>
 
-    <script>
-        // Auto submit form khi chọn trạng thái
-        document.querySelectorAll('.status-select').forEach(select => {
-            select.addEventListener('change', function() {
-                this.form.submit();
-            });
-        });
-    </script>
+
 </body>
 </html>
