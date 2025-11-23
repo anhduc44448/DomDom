@@ -304,14 +304,6 @@ $categories = $conn->query("SELECT * FROM categories ORDER BY name");
                 reader.readAsDataURL(file);
             }
         });
-
-        // Auto format price input
-        document.getElementById('price').addEventListener('input', function(e) {
-            let value = e.target.value.replace(/\D/g, '');
-            if (value) {
-                e.target.value = parseInt(value).toLocaleString('vi-VN');
-            }
-        });
     </script>
 </body>
 </html>
