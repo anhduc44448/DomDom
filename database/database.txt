@@ -128,8 +128,8 @@ INSERT INTO products (name, description, price, image_path, category_id, is_best
 ('Sữa tươi trân châu đường đen', 'Sữa tươi kết hợp trân châu đường đen', 35000, 'database/AnhDoUong/sua_tuoi_tran_chau_duong_dene.png', 2, 0);
 
 INSERT INTO orders (user_id, customer_name, table_number, customer_note, total_amount, status) VALUES
-(3, 'Nguyễn Văn A', 'VIP-1', 'Không đường, ít đá', 57000, 'pending'),
-(3, 'Trần Thị B', '10', 'Thêm tỏi', 70000, 'confirmed');
+(3, 'Nguyễn Văn A', 'VIP-1', 'Không đường, ít đá', 57000, 'preparing'),
+(3, 'Trần Thị B', '10', 'Thêm tỏi', 70000, 'completed');
 
 INSERT INTO order_items (order_id, product_id, product_name, quantity, size, unit_price, total_price) VALUES
 (1, 1, 'Bánh tráng bơ', 2, 'M', 25000, 50000),
