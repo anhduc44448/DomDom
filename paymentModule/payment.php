@@ -28,7 +28,7 @@ $table = $customerTable;
 $note = $customerNote;
 $amt = $amount;
 
-$stmt = $conn->prepare("INSERT INTO orders (customer_name, table_number, customer_note, total_amount, status) VALUES (?, ?, ?, ?, 'pending')");
+$stmt = $conn->prepare("INSERT INTO orders (customer_name, table_number, customer_note, total_amount, status) VALUES (?, ?, ?, ?, 'preparing')");
 if (!$stmt) {
     die("Prepare failed: " . $conn->error);
 }
@@ -90,7 +90,7 @@ if(isset($result["return_code"]) && $result["return_code"] == 1){
     exit;
 } else {
     // Payment creation failed, update orders status
-    $stmt_fail = $conn->prepare("UPDATE orders SET status='payment_failed' WHERE id=?");
+    $stmt_fail = $conn->prepare("UPDATE orders SET status='cancelled' WHERE id=?");
     if ($stmt_fail) {
         $stmt_fail->bind_param("i", $orderId);
         $stmt_fail->execute();

@@ -42,7 +42,7 @@ try {
 
     // Update Orders status if successful
     if ($payment_status === 'success') {
-      $update_stmt = $conn->prepare("UPDATE orders SET status='completed' WHERE id IN (SELECT order_id FROM payments WHERE transaction_id=?)");
+      $update_stmt = $conn->prepare("UPDATE orders SET status='preparing' WHERE id IN (SELECT order_id FROM payments WHERE transaction_id=?)");
       if ($update_stmt) {
         $update_stmt->bind_param("s", $datajson["app_trans_id"]);
         $update_stmt->execute();

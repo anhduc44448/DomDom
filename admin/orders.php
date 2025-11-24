@@ -104,6 +104,7 @@ $orders = $stmt->get_result();
 $stats = [
     'total' => $conn->query("SELECT COUNT(*) FROM orders")->fetch_row()[0],
     'pending' => $conn->query("SELECT COUNT(*) FROM orders WHERE status = 'pending'")->fetch_row()[0],
+    'preparing' => $conn->query("SELECT COUNT(*) FROM orders WHERE status = 'preparing'")->fetch_row()[0],
     'confirmed' => $conn->query("SELECT COUNT(*) FROM orders WHERE status = 'confirmed'")->fetch_row()[0],
     'delivering' => $conn->query("SELECT COUNT(*) FROM orders WHERE status = 'delivering'")->fetch_row()[0],
     'completed' => $conn->query("SELECT COUNT(*) FROM orders WHERE status = 'completed'")->fetch_row()[0],
@@ -155,31 +156,11 @@ $stats = [
                 <div class="stats-grid compact">
                     <div class="stat-card mini">
                         <div class="stat-icon">
-                            <i class="fas fa-clock"></i>
+                            <i class="fas fa-utensils"></i>
                         </div>
                         <div class="stat-info">
-                            <h3><?php echo $stats['pending']; ?></h3>
-                            <p>Chờ xử lý</p>
-                        </div>
-                    </div>
-
-                    <div class="stat-card mini">
-                        <div class="stat-icon">
-                            <i class="fas fa-check-circle"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3><?php echo $stats['confirmed']; ?></h3>
-                            <p>Đã xác nhận</p>
-                        </div>
-                    </div>
-
-                    <div class="stat-card mini">
-                        <div class="stat-icon">
-                            <i class="fas fa-truck"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3><?php echo $stats['delivering']; ?></h3>
-                            <p>Đang giao</p>
+                            <h3><?php echo $stats['preparing']; ?></h3>
+                            <p>Đang chuẩn bị</p>
                         </div>
                     </div>
 
@@ -214,11 +195,9 @@ $stats = [
                             <div class="filter-row">
                                 <div class="filter-group">
                                     <label for="status">Lọc theo trạng thái:</label>
-                                    <select id="status" name="status" class="form-control">
+<select id="status" name="status" class="form-control">
                                         <option value="all">Tất cả trạng thái</option>
-                                        <option value="pending" <?php echo $filter_status === 'pending' ? 'selected' : ''; ?>>Chờ xử lý</option>
-                                        <option value="confirmed" <?php echo $filter_status === 'confirmed' ? 'selected' : ''; ?>>Đã xác nhận</option>
-                                        <option value="delivering" <?php echo $filter_status === 'delivering' ? 'selected' : ''; ?>>Đang giao</option>
+                                        <option value="preparing" <?php echo $filter_status === 'preparing' ? 'selected' : ''; ?>>Đang chuẩn bị</option>
                                         <option value="completed" <?php echo $filter_status === 'completed' ? 'selected' : ''; ?>>Hoàn thành</option>
                                         <option value="cancelled" <?php echo $filter_status === 'cancelled' ? 'selected' : ''; ?>>Đã hủy</option>
                                     </select>
@@ -292,9 +271,7 @@ $stats = [
                                                 <form method="POST" class="status-form">
                                                     <input type="hidden" name="order_id" value="<?php echo $order['id']; ?>">
                                                     <select name="status" class="status-select status-<?php echo $order['status']; ?>">
-                                                        <option value="pending" <?php echo $order['status'] == 'pending' ? 'selected' : ''; ?>>Chờ xử lý</option>
-                                                        <option value="confirmed" <?php echo $order['status'] == 'confirmed' ? 'selected' : ''; ?>>Đã xác nhận</option>
-                                                        <option value="delivering" <?php echo $order['status'] == 'delivering' ? 'selected' : ''; ?>>Đang giao</option>
+                                                        <option value="preparing" <?php echo $order['status'] == 'preparing' ? 'selected' : ''; ?>>Đang chuẩn bị</option>
                                                         <option value="completed" <?php echo $order['status'] == 'completed' ? 'selected' : ''; ?>>Hoàn thành</option>
                                                         <option value="cancelled" <?php echo $order['status'] == 'cancelled' ? 'selected' : ''; ?>>Đã hủy</option>
                                                     </select>

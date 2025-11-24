@@ -10,9 +10,7 @@ $order_details = [];
 $order_items = [];
 
 $preparation_map = [
-    'pending' => 'Chờ xử lý',
-    'confirmed' => 'Đã xác nhận',
-    'delivering' => 'Đang giao',
+    'preparing' => 'Đang chuẩn bị',
     'completed' => 'Hoàn thành',
     'cancelled' => 'Đã hủy'
 ];
@@ -124,7 +122,7 @@ if ($app_trans_id) {
                 <div class="detail-item"><strong>Khách hàng:</strong> <?php echo htmlspecialchars($order_details['customer_name']); ?></div>
                 <div class="detail-item"><strong>Số bàn:</strong> <?php echo htmlspecialchars($order_details['table_number'] ?: 'N/A'); ?></div>
                 <div class="detail-item"><strong>Ghi chú:</strong> <?php echo htmlspecialchars($order_details['customer_note'] ?: 'Không có'); ?></div>
-                <div class="detail-item"><strong>Trạng thái:</strong> <?php echo htmlspecialchars($order_details['payment_status'] . ' / Chuẩn bị: ' . ($preparation_map[$order_details['order_status']] ?? $order_details['order_status'])); ?></div>
+                <div class="detail-item" id="status-display"><strong>Trạng thái:</strong> <?php echo htmlspecialchars($order_details['payment_status'] . ' / Chuẩn bị: ' . ($preparation_map[$order_details['order_status']] ?? $order_details['order_status'])); ?></div>
             </div>
 
             <?php if (!empty($order_items)): ?>
@@ -157,5 +155,23 @@ if ($app_trans_id) {
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <?php if ($order_details): ?>
+  <script>
+  function updateStatus() {
+      fetch('get_status.php?apptransid=<?php echo urlencode($app_trans_id); ?>')
+          .then(response => response.json())
+          .then(data => {
+              if (data.payment_status && data.order_status_text) {
+                  const statusDisplay = document.getElementById('status-display');
+                  statusDisplay.innerHTML = `<strong>Trạng thái:</strong> ${data.payment_status} / Chuẩn bị: ${data.order_status_text}`;
+              }
+          })
+          .catch(error => console.error('Error updating status:', error));
+  }
+
+  // Update every 10 seconds
+  setInterval(updateStatus, 10000);
+  </script>
+  <?php endif; ?>
 </body>
 </html>
