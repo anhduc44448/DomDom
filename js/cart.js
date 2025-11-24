@@ -34,17 +34,20 @@ function renderCart() {
   const cartList = document.getElementById("cartList");
   const emptyCart = document.getElementById("emptyCart");
   const cartSummary = document.querySelector(".cart-summary");
+  const customerForm = document.getElementById("customerForm");
   const totalAmount = document.getElementById("totalAmount");
 
   if (cart.length === 0) {
     cartList.style.display = "none";
     cartSummary.style.display = "none";
+    customerForm.style.display = "none";
     emptyCart.style.display = "block";
     return;
   }
 
   cartList.style.display = "block";
   cartSummary.style.display = "block";
+  customerForm.style.display = "block";
   emptyCart.style.display = "none";
 
   let html = "";
@@ -68,17 +71,6 @@ function renderCart() {
                     <div class="cart-info">Số lượng: <b>${
                       item.quantity
                     }</b></div>
-                    <div class="cart-info">Người nhận: ${
-                      item.customer.name
-                    } | ĐT: ${item.customer.phone}</div>
-                    <div class="cart-info">Địa chỉ: ${
-                      item.customer.address
-                    }</div>
-                    ${
-                      item.customer.note
-                        ? `<div class="cart-info">Ghi chú: ${item.customer.note}</div>`
-                        : ""
-                    }
                     <div class="cart-price">${formatPrice(itemTotal)}đ</div>
                     <div class="quantity-controls">
                         <button class="quantity-btn" onclick="updateQuantity(${idx}, -1)">-</button>
@@ -93,6 +85,12 @@ function renderCart() {
 
   cartList.innerHTML = html;
   totalAmount.textContent = formatPrice(total) + "đ";
+
+  // Pre-fill customer info if user is logged in
+  const username = localStorage.getItem("username");
+  if (username && !document.getElementById("customerName").value) {
+    document.getElementById("customerName").value = username;
+  }
 }
 
 // Lấy giá sản phẩm
@@ -154,28 +152,71 @@ function removeItem(idx) {
   }
 }
 
-// Xác nhận đặt hàng
-function confirmOrder() {
+// Xử lý submit form thanh toán
+function handlePaymentSubmit(e) {
+  e.preventDefault();
+
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  if (cart.length === 0) return;
+  if (cart.length === 0) return false;
 
   if (localStorage.getItem("isLoggedIn") !== "true") {
     alert("Bạn cần đăng nhập để đặt hàng!");
     window.location.href = "login.php";
-    return;
+    return false;
   }
 
-  if (
-    confirm(
-      "Xác nhận đặt hàng? Đơn hàng sẽ được xử lý trong thời gian sớm nhất."
-    )
-  ) {
-    alert(
-      "✅ Đặt hàng thành công! Cảm ơn bạn đã sử dụng dịch vụ Đom đóm quán."
-    );
-    localStorage.removeItem("cart");
-    renderCart();
+  // Validate customer info
+  const customerName = document.getElementById("customerName").value.trim();
+  const customerTable = document.getElementById("customerTable").value.trim();
+
+  if (!customerName) {
+    alert("Vui lòng nhập tên người nhận!");
+    document.getElementById("customerName").focus();
+    return false;
   }
+
+  if (!customerTable) {
+    alert("Vui lòng chọn số bàn!");
+    document.getElementById("customerTable").focus();
+    return false;
+  }
+
+  // Update cart items with customer info
+  const customerData = {
+    name: customerName,
+    tableNumber: customerTable,
+    note: document.getElementById("customerNote").value.trim()
+  };
+
+  cart.forEach((item, index) => {
+    cart[index].customer = customerData;
+  });
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  // Calculate total amount and create description
+  let totalAmount = 0;
+  let descriptionParts = [];
+
+  cart.forEach(item => {
+    const itemPrice = getItemPrice(item.name);
+    const itemTotal = itemPrice * item.quantity;
+    totalAmount += itemTotal;
+    descriptionParts.push(`${item.name} x${item.quantity}`);
+  });
+
+  const description = "Đơn hàng: " + descriptionParts.join(", ");
+
+  // Fill hidden inputs
+  document.getElementById("hiddenAmount").value = totalAmount;
+  document.getElementById("hiddenDescription").value = description;
+  document.getElementById("hiddenCustomerData").value = JSON.stringify(customerData);
+
+  // Submit form
+  if (confirm("Xác nhận thanh toán qua Zalopay?")) {
+    document.getElementById("paymentForm").submit();
+  }
+
+  return false;
 }
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -185,7 +226,10 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .getElementById("loginBtn")
     .addEventListener("click", handleLoginClick);
-  document
-    .getElementById("confirmOrderBtn")
-    .addEventListener("click", confirmOrder);
+
+  // Attach payment form handler
+  const paymentForm = document.getElementById("paymentForm");
+  if (paymentForm) {
+    paymentForm.addEventListener("submit", handlePaymentSubmit);
+  }
 });

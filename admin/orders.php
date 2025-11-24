@@ -261,7 +261,7 @@ $stats = [
                                         <tr>
                                             <th>Mã đơn</th>
                                             <th>Khách hàng</th>
-                                            <th>Số điện thoại</th>
+                                            <th>Ghi chú</th>
                                             <th>Sản phẩm</th>
                                             <th>Tổng tiền</th>
                                             <th>Trạng thái</th>
@@ -280,9 +280,9 @@ $stats = [
                                             </td>
                                             <td>
                                                 <strong><?php echo htmlspecialchars($order['customer_name']); ?></strong>
-                                                <br><small class="text-muted"><?php echo substr($order['customer_address'], 0, 30); ?>...</small>
+                                                <br><small class="text-muted"><?php echo substr($order['table_number'], 0, 30); ?></small>
                                             </td>
-                                            <td><?php echo $order['customer_phone']; ?></td>
+                                            <td><?php echo $order['customer_note']; ?></td>
                                             <td>
                                                 <span class="badge"><?php echo $order['item_count']; ?> món</span>
                                                 <br><small><?php echo $order['total_quantity']; ?> sản phẩm</small>

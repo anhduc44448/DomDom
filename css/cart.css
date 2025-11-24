@@ -254,4 +254,108 @@ footer {
     width: 100%;
     margin-bottom: 10px;
   }
+
+  .customer-info {
+    text-align: left;
+    padding: 0px !important;
+  }
+
+  .customer-info .form-group {
+    margin-bottom: 20px;
+  }
+
+  .customer-info label {
+    font-weight: 600;
+    color: #4e342e;
+  }
+
+  .customer-info textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+}
+
+/* Customer Info Section */
+.customer-info {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  margin-top: 30px;
+}
+
+.customer-info h4 {
+  color: #4e342e;
+  font-weight: bold;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ff7043;
+  padding-bottom: 10px;
+}
+
+.customer-info .form-group {
+  margin-bottom: 20px;
+}
+
+.customer-info label {
+  font-weight: 600;
+  color: #4e342e;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.customer-info .form-control {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.customer-info .form-control:focus {
+  outline: none;
+  border-color: #ff7043;
+  box-shadow: 0 0 0 3px rgba(255, 112, 67, 0.1);
+}
+
+.customer-info textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Responsive customer form */
+@media (max-width: 768px) {
+  .cart-item img {
+    width: 120px;
+    height: 100px;
+  }
+
+  .cart-summary .text-end {
+    text-align: center !important;
+    margin-top: 20px;
+  }
+
+  .cart-summary .btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .customer-info {
+    text-align: left;
+    padding: 0px !important;
+  }
+
+  .customer-info .form-group {
+    margin-bottom: 20px;
+  }
+
+  .customer-info label {
+    font-weight: 600;
+    color: #4e342e;
+  }
+
+  .customer-info textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
 }

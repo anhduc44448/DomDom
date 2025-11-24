@@ -1,9 +1,12 @@
--- =======================
--- TẠO BẢNG
--- =======================
+-- XÓA DATABASE CŨ (nếu có) và tạo mới
+DROP DATABASE IF EXISTS domdom_db;
+CREATE DATABASE domdom_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE domdom_db;
 
--- Bảng users
-CREATE TABLE IF NOT EXISTS users (
+-- ====================
+-- BẢNG USERS (Admin, Staff, Customers)
+-- ====================
+CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
@@ -13,16 +16,20 @@ CREATE TABLE IF NOT EXISTS users (
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- Bảng categories
-CREATE TABLE IF NOT EXISTS categories (
+-- ====================
+-- BẢNG CATEGORIES (Loại sản phẩm)
+-- ====================
+CREATE TABLE categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     type VARCHAR(10) NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- Bảng products
-CREATE TABLE IF NOT EXISTS products (
+-- ====================
+-- BẢNG PRODUCTS (Sản phẩm)
+-- ====================
+CREATE TABLE products (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description TEXT,
@@ -35,22 +42,25 @@ CREATE TABLE IF NOT EXISTS products (
     FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE SET NULL
 );
 
--- Bảng orders
-CREATE TABLE IF NOT EXISTS orders (
+-- ====================
+-- BẢNG ORDERS (Đơn hàng - Model ăn tại chỗ)
+-- ====================
+CREATE TABLE orders (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
-    customer_name VARCHAR(100) NOT NULL,
-    customer_phone VARCHAR(20) NOT NULL,
-    customer_address TEXT NOT NULL,
-    customer_note TEXT,
-    total_amount DECIMAL(10,2) NOT NULL,
-    status VARCHAR(20) DEFAULT 'pending',
-    order_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    customer_name VARCHAR(100) NOT NULL,        -- Tên khách hàng
+    table_number VARCHAR(10) DEFAULT NULL,      -- Số bàn phục vụ
+    customer_note TEXT,                         -- Ghi chú (optional)
+    total_amount DECIMAL(10,2) NOT NULL,        -- Tổng tiền
+    status VARCHAR(20) DEFAULT 'pending',       -- Trạng thái đơn
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Thời gian đặt
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
 );
 
--- Bảng order_items
-CREATE TABLE IF NOT EXISTS order_items (
+-- ====================
+-- BẢNG ORDER_ITEMS (Chi tiết đơn hàng)
+-- ====================
+CREATE TABLE order_items (
     id INT AUTO_INCREMENT PRIMARY KEY,
     order_id INT,
     product_id INT,
@@ -61,6 +71,21 @@ CREATE TABLE IF NOT EXISTS order_items (
     total_price DECIMAL(10,2) NOT NULL,
     FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE SET NULL
+);
+
+-- ====================
+-- BẢNG PAYMENTS (Thanh toán - Zalopay)
+-- ====================
+CREATE TABLE payments (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    order_id INT NOT NULL,
+    payment_method VARCHAR(50) NOT NULL DEFAULT 'zalopay',
+    payment_status ENUM('pending', 'success', 'failed', 'cancelled') NOT NULL DEFAULT 'pending',
+    transaction_id VARCHAR(255),
+    amount DECIMAL(10,2) NOT NULL,
+    zp_trans_id VARCHAR(255),
+    payment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
 );
 
 -- =======================
@@ -102,15 +127,19 @@ INSERT INTO products (name, description, price, image_path, category_id, is_best
 ('Nước ép cà rốt', 'Nước ép cà rốt tốt cho sức khỏe', 28000, 'database/AnhDoUong/NuocEpCaRot.png', 4, 0),
 ('Sữa tươi trân châu đường đen', 'Sữa tươi kết hợp trân châu đường đen', 35000, 'database/AnhDoUong/sua_tuoi_tran_chau_duong_dene.png', 2, 0);
 
-INSERT INTO orders (user_id, customer_name, customer_phone, customer_address, total_amount, status) VALUES
-(3, 'Nguyễn Văn A', '0901234567', '123 Đường ABC, Quận 1, TP.HCM', 87000, 'pending'),
-(4, 'Trần Thị B', '0912345678', '456 Đường XYZ, Quận 2, TP.HCM', 125000, 'confirmed');
+INSERT INTO orders (user_id, customer_name, table_number, customer_note, total_amount, status) VALUES
+(3, 'Nguyễn Văn A', 'VIP-1', 'Không đường, ít đá', 57000, 'pending'),
+(3, 'Trần Thị B', '10', 'Thêm tỏi', 70000, 'confirmed');
 
 INSERT INTO order_items (order_id, product_id, product_name, quantity, size, unit_price, total_price) VALUES
 (1, 1, 'Bánh tráng bơ', 2, 'M', 25000, 50000),
 (1, 11, 'Trà đào cam sả', 1, 'L', 32000, 37000),
 (2, 12, 'Trà sữa trân châu đường đen', 2, 'M', 35000, 70000),
 (2, 5, 'Da heo trộn', 2, 'M', 27000, 54000);
+
+INSERT INTO payments (order_id, payment_method, payment_status, transaction_id, amount) VALUES
+(1, 'zalopay', 'pending', 'TEST_TRANS_123', 57000),
+(2, 'zalopay', 'success', 'ZALO_456', 70000);
 
 -- INDEXES
 CREATE INDEX idx_products_category ON products(category_id);
@@ -119,3 +148,5 @@ CREATE INDEX idx_orders_user ON orders(user_id);
 CREATE INDEX idx_orders_status ON orders(status);
 CREATE INDEX idx_order_items_order ON order_items(order_id);
 CREATE INDEX idx_users_role ON users(role);
+
+SELECT 'Database domdom_db đã được tạo thành công!' AS message;

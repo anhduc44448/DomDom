@@ -192,7 +192,7 @@ function handleQuickAddToCart(cardElement) {
   );
   const itemImage = cardElement.querySelector(".card-img-top").src;
 
-  // Create cart item
+  // Create cart item (customer info will be added at checkout)
   const cartItem = {
     name: itemName,
     img: itemImage,
@@ -200,12 +200,6 @@ function handleQuickAddToCart(cardElement) {
     size: "M",
     price: itemPrice,
     total: itemPrice,
-    customer: {
-      name: localStorage.getItem("username") || "Khách hàng",
-      phone: "",
-      address: "",
-      note: "Thêm nhanh từ menu",
-    },
     addedAt: new Date().toISOString(),
   };
 

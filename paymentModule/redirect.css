@@ -1,0 +1,251 @@
+/* paymentModule/redirect.css - Custom styles for redirect page */
+
+/* General styles */
+body {
+	background: linear-gradient(180deg, #ff9900 0%, #fdcc82 100%);
+	min-height: 100vh;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Main content container */
+.content-wrapper {
+	min-height: calc(100vh - 60px); /* Footer ~60px */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 40px 20px;
+}
+
+.status-card {
+	background: rgba(255, 255, 255, 0.9);
+	-webkit-backdrop-filter: blur(20px);
+	backdrop-filter: blur(20px);
+	border-radius: 15px;
+	box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+	padding: 40px;
+	max-width: 800px;
+	width: 100%;
+	animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+/* Status section */
+.status-header {
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.status-header h1 {
+	color: #333;
+	font-weight: 300;
+	font-size: 2.5rem;
+	margin-bottom: 15px;
+}
+
+.status-result {
+	font-size: 1.2rem;
+	font-weight: 500;
+	color: #555;
+	margin-bottom: 20px;
+}
+
+.status-message {
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+/* Status icons and colors */
+.status-success {
+	background-color: #d4edda;
+	border-color: #c3e6cb;
+	color: #155724;
+}
+
+.status-success .fas {
+	color: #28a745;
+}
+
+.status-failed {
+	background-color: #f8d7da;
+	border-color: #f5c6cb;
+	color: #721c24;
+}
+
+.status-failed .fas {
+	color: #dc3545;
+}
+
+.status-warning {
+	background-color: #fff3cd;
+	border-color: #ffeaa7;
+	color: #856404;
+}
+
+.status-warning .fas {
+	color: #ffc107;
+}
+
+.status-icon {
+	font-size: 3rem;
+	margin-right: 15px;
+	animation: bounceIn 0.8s ease-out;
+}
+
+@keyframes bounceIn {
+	0% {
+		opacity: 0;
+		transform: scale(0.3);
+	}
+	50% {
+		opacity: 1;
+		transform: scale(1.05);
+	}
+	70% {
+		transform: scale(0.9);
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+/* Order details sections */
+.order-details {
+	margin-top: 40px;
+}
+
+.section-title {
+	color: #333;
+	font-weight: 600;
+	font-size: 1.25rem;
+	margin-bottom: 20px;
+	border-bottom: 2px solid #f0f0f0;
+	padding-bottom: 10px;
+}
+
+.detail-list {
+	background: #f8f9fa;
+	border-radius: 8px;
+	padding: 20px;
+}
+
+.detail-item {
+	padding: 10px 0;
+	border-bottom: 1px solid #eee;
+}
+
+.detail-item:last-child {
+	border-bottom: none;
+}
+
+.detail-item strong {
+	color: #495057;
+	display: inline-block;
+	min-width: 150px;
+}
+
+/* Order items */
+.items-list {
+	background: #f8f9fa;
+	border-radius: 8px;
+	padding: 20px;
+}
+
+.item {
+	padding: 15px 0;
+	border-bottom: 1px solid #dee2e6;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.item:last-child {
+	border-bottom: none;
+}
+
+.item-name {
+	font-weight: 500;
+	color: #333;
+}
+
+.item-details {
+	color: #6c757d;
+	font-size: 0.9rem;
+}
+
+.item-price {
+	font-weight: 600;
+	color: #28a745;
+}
+
+/* Back button */
+.back-button-container {
+	text-align: center;
+	margin-top: 40px;
+}
+
+.btn-success {
+	background: linear-gradient(45deg, #ff9900, #fdcc82);
+	border: none;
+	padding: 12px 30px;
+	font-size: 1rem;
+	font-weight: 500;
+	border-radius: 25px;
+	transition: all 0.3s ease;
+	box-shadow: 0 4px 15px rgba(0, 184, 148, 0.3);
+}
+
+.btn-success:hover {
+	background: linear-gradient(45deg, #fdcc82, #ff9900);
+	transform: translateY(-2px);
+	box-shadow: 0 6px 20px rgba(0, 184, 148, 0.4);
+}
+
+/* Footer */
+footer {
+	background: rgba(255, 255, 255, 0.1);
+	-webkit-backdrop-filter: blur(10px);
+	backdrop-filter: blur(10px);
+	color: white;
+	text-align: center;
+	padding: 15px 0;
+	border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+	.status-card {
+		margin: 20px;
+		padding: 30px 20px;
+	}
+
+	.status-header h1 {
+		font-size: 2rem;
+	}
+
+	.detail-item strong {
+		min-width: 120px;
+		display: block;
+		margin-bottom: 5px;
+	}
+
+	.item {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 5px;
+	}
+
+	.item-price {
+		align-self: flex-end;
+	}
+}

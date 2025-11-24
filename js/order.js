@@ -249,41 +249,31 @@ function initOrderForm() {
 
   orderForm.addEventListener("submit", function (e) {
     e.preventDefault();
+    console.log("Form submit triggered");
 
-    // Validate form
-    if (!validateForm()) {
-      return;
+    // Validate size selection first
+    const sizeSelected = document.querySelector('input[name="size"]:checked');
+    console.log("Size selected:", sizeSelected);
+
+    if (!sizeSelected) {
+      alert("Vui lòng chọn kích cỡ trước khi đặt hàng!");
+      return false;
     }
 
     // Show loading state
     submitBtn.classList.add("loading");
     submitBtn.disabled = true;
+    submitBtn.textContent = "Đang thêm vào giỏ...";
 
-    // Simulate processing
+    // Process order
     setTimeout(() => {
       addToCart();
       submitBtn.classList.remove("loading");
       submitBtn.disabled = false;
     }, 1500);
+
+    return false;
   });
-}
-
-// Validate form - CHỈ CÒN 2 TRƯỜNG BẮT BUỘC
-function validateForm() {
-  const name = document.getElementById("name").value.trim();
-  const tableNumber = document.getElementById("tableNumber").value;
-
-  if (!name) {
-    alert("Vui lòng nhập tên người nhận");
-    return false;
-  }
-
-  if (!tableNumber) {
-    alert("Vui lòng chọn số bàn");
-    return false;
-  }
-
-  return true;
 }
 
 // Add item to cart
@@ -305,11 +295,6 @@ function addToCart() {
     total: parseInt(
       document.getElementById("totalPrice").textContent.replace(/\./g, "")
     ),
-    customer: {
-      name: document.getElementById("name").value.trim(),
-      tableNumber: document.getElementById("tableNumber").value,
-      note: document.getElementById("note").value.trim(),
-    },
     addedAt: new Date().toISOString(),
   };
 
@@ -323,9 +308,8 @@ function addToCart() {
 // Show success message and redirect
 function showSuccessMessage() {
   const submitBtn = document.querySelector(".btn-order");
-  const originalText = submitBtn.querySelector(".btn-text").textContent;
 
-  submitBtn.querySelector(".btn-text").textContent = "✅ Đã thêm vào giỏ hàng!";
+  submitBtn.textContent = "✅ Đã thêm vào giỏ hàng!";
   submitBtn.style.background = "#28a745";
 
   setTimeout(() => {
@@ -334,13 +318,7 @@ function showSuccessMessage() {
   }, 1000);
 }
 
-// Auto-fill user information if available
-function autoFillUserInfo() {
-  const username = localStorage.getItem("username");
-  if (username) {
-    document.getElementById("name").value = username;
-  }
-}
+// Customer info now handled at cart page
 
 // Initialize everything when DOM is loaded
 document.addEventListener("DOMContentLoaded", function () {
@@ -352,5 +330,4 @@ document.addEventListener("DOMContentLoaded", function () {
   initQuantityControls();
   initSizeSelection();
   initOrderForm();
-  autoFillUserInfo();
 });
