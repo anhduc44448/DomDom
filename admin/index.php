@@ -140,11 +140,9 @@ $best_sellers = $conn->query("
                                             <div class="order-meta">
                                                 <span class="amount"><?php echo number_format($order['total_amount']); ?>đ</span>
                                                 <span class="status status-<?php echo $order['status']; ?>">
-                                                    <?php 
+                                                    <?php
                                                     $status_text = [
-                                                        'pending' => 'Chờ xử lý',
-                                                        'confirmed' => 'Đã xác nhận', 
-                                                        'delivering' => 'Đang giao',
+                                                        'preparing' => 'Đang chuẩn bị',
                                                         'completed' => 'Hoàn thành',
                                                         'cancelled' => 'Đã hủy'
                                                     ];
