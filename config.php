@@ -1,9 +1,9 @@
 <?php
 // config.php - Kết nối database và thiết lập cơ bản
-$host = "localhost";
+$host = "localhost:3366";
 $user = "root";
-$pass = "12345678";
-$dbname = "domdom_db";
+$pass = "";
+$dbname = "domdom1";
 
 // Kết nối database
 $conn = new mysqli($host, $user, $pass, $dbname);

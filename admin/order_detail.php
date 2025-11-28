@@ -100,13 +100,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_status'])) {
                                     <span class="status status-<?php echo $order['status']; ?>">
                                         <?php 
                                         $status_text = [
-                                            'pending' => 'Chờ xử lý',
-                                            'confirmed' => 'Đã xác nhận',
-                                            'delivering' => 'Đang giao',
-                                            'completed' => 'Hoàn thành',
-                                            'cancelled' => 'Đã hủy'
+                                            'preparing' => '🔄 Đang chuẩn bị',
+                                            'completed' => '✅ Hoàn thành', 
+                                            'cancelled' => '❌ Đã hủy'
                                         ];
-                                        echo $status_text[$order['status']];
+                                        echo $status_text[$order['status']] ?? $order['status'];
                                         ?>
                                     </span>
                                 </div>
@@ -118,24 +116,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_status'])) {
                         </div>
                     </div>
 
-                    <!-- Thông tin khách hàng -->
+                    <!-- Thông tin đặt hàng -->
                     <div class="card">
                         <div class="card-header">
-                            <h4><i class="fas fa-user"></i> Thông tin Khách hàng</h4>
+                            <h4><i class="fas fa-user"></i> Thông tin Đặt hàng</h4>
                         </div>
                         <div class="card-body">
                             <div class="info-grid">
                                 <div class="info-item">
-                                    <label>Họ tên:</label>
-                                    <span><?php echo htmlspecialchars($order['customer_name']); ?></span>
+                                    <label>Tên khách hàng:</label>
+                                    <span><strong><?php echo htmlspecialchars($order['customer_name']); ?></strong></span>
                                 </div>
                                 <div class="info-item">
-                                    <label>Số điện thoại:</label>
-                                    <span><?php echo $order['customer_phone']; ?></span>
-                                </div>
-                                <div class="info-item">
-                                    <label>Địa chỉ:</label>
-                                    <span><?php echo htmlspecialchars($order['customer_address']); ?></span>
+                                    <label>Số bàn:</label>
+                                    <span class="table-number"><?php echo $order['table_number']; ?></span>
                                 </div>
                                 <?php if ($order['username']): ?>
                                 <div class="info-item">
@@ -145,8 +139,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_status'])) {
                                 <?php endif; ?>
                                 <?php if ($order['customer_note']): ?>
                                 <div class="info-item">
-                                    <label>Ghi chú của KH:</label>
-                                    <span><?php echo htmlspecialchars($order['customer_note']); ?></span>
+                                    <label>Ghi chú:</label>
+                                    <span class="customer-note">"<?php echo htmlspecialchars($order['customer_note']); ?>"</span>
                                 </div>
                                 <?php endif; ?>
                             </div>
@@ -163,11 +157,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_status'])) {
                                 <div class="form-group">
                                     <label for="status">Trạng thái mới:</label>
                                     <select id="status" name="status" class="form-control" required>
-                                        <option value="pending" <?php echo $order['status'] == 'pending' ? 'selected' : ''; ?>>Chờ xử lý</option>
-                                        <option value="confirmed" <?php echo $order['status'] == 'confirmed' ? 'selected' : ''; ?>>Đã xác nhận</option>
-                                        <option value="delivering" <?php echo $order['status'] == 'delivering' ? 'selected' : ''; ?>>Đang giao</option>
-                                        <option value="completed" <?php echo $order['status'] == 'completed' ? 'selected' : ''; ?>>Hoàn thành</option>
-                                        <option value="cancelled" <?php echo $order['status'] == 'cancelled' ? 'selected' : ''; ?>>Đã hủy</option>
+                                        <option value="preparing" <?php echo $order['status'] == 'preparing' ? 'selected' : ''; ?>>🔄 Đang chuẩn bị</option>
+                                        <option value="completed" <?php echo $order['status'] == 'completed' ? 'selected' : ''; ?>>✅ Hoàn thành</option>
+                                        <option value="cancelled" <?php echo $order['status'] == 'cancelled' ? 'selected' : ''; ?>>❌ Đã hủy</option>
                                     </select>
                                 </div>
                                 <button type="submit" name="update_status" class="btn btn-success">
@@ -265,9 +257,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_status'])) {
 
         .info-item {
             display: grid;
-            grid-template-columns: 120px 1fr;
+            grid-template-columns: 140px 1fr;
             gap: 10px;
             align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
         }
 
         .info-item label {
@@ -276,10 +274,59 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_status'])) {
             margin: 0;
         }
 
+        .table-number {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .customer-note {
+            background: #fff3cd;
+            color: #856404;
+            padding: 8px 12px;
+            border-radius: 8px;
+            border-left: 3px solid #ffc107;
+            font-style: italic;
+        }
+
+        .status {
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .status-preparing {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-completed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
         .product-info {
             display: flex;
             align-items: center;
             gap: 10px;
+        }
+
+        .product-image {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
         }
 
         .product-details {
@@ -308,6 +355,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_status'])) {
             .info-item {
                 grid-template-columns: 1fr;
                 gap: 5px;
+                text-align: center;
+            }
+
+            .product-info {
+                flex-direction: column;
+                text-align: center;
             }
         }
 
@@ -318,6 +371,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update_status'])) {
             
             .main-content {
                 margin-left: 0;
+            }
+
+            .btn {
+                display: none;
             }
         }
     </style>
