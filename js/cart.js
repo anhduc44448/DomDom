@@ -78,7 +78,19 @@ function renderCart() {
   let total = 0;
 
   cart.forEach((item, idx) => {
+<<<<<<< HEAD
     const itemTotal = item.price * item.quantity;
+=======
+    const basePrice = getItemPrice(item.name);
+    
+    // Calculate price based on size
+    let multiplier = 1;
+    if (item.size === 'S') multiplier = 0.9;
+    if (item.size === 'L') multiplier = 1.2;
+    
+    const unitPrice = Math.round(basePrice * multiplier);
+    const itemTotal = unitPrice * item.quantity;
+>>>>>>> db8b244a84e9f5a8fddafc43aaa9f8a888cdf0f7
     total += itemTotal;
 
     html += `
@@ -198,7 +210,24 @@ async function submitOrder() {
       body: JSON.stringify(orderData),
     });
 
+<<<<<<< HEAD
     const result = await response.json();
+=======
+  cart.forEach(item => {
+    const basePrice = getItemPrice(item.name);
+    
+    // Calculate price based on size
+    let multiplier = 1;
+    if (item.size === 'S') multiplier = 0.9;
+    if (item.size === 'L') multiplier = 1.2;
+    
+    const unitPrice = Math.round(basePrice * multiplier);
+    const itemTotal = unitPrice * item.quantity;
+    
+    totalAmount += itemTotal;
+    descriptionParts.push(`${item.name} (${getSizeName(item.size)}) x${item.quantity}`);
+  });
+>>>>>>> db8b244a84e9f5a8fddafc43aaa9f8a888cdf0f7
 
     if (result.success) {
       // Clear cart

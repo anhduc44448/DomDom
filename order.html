@@ -57,6 +57,82 @@
                 <p class="mt-2">Đang tải thông tin sản phẩm...</p>
               </div>
             </div>
+<<<<<<< HEAD
+=======
+
+            <form id="orderForm" class="order-form">
+              <!-- Quantity & Size -->
+              <div class="form-section">
+                <h4>Thông tin món</h4>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label for="quantity" class="form-label">Số lượng</label>
+                      <div class="quantity-control">
+                        <button type="button" class="quantity-btn" id="decreaseQty">-</button>
+                        <input type="number" class="form-control" id="quantity" value="1" min="1" max="10">
+                        <button type="button" class="quantity-btn" id="increaseQty">+</button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="mb-3">
+                      <label class="form-label">Kích cỡ</label>
+                      <div class="size-options">
+                        <label class="size-option">
+                          <input type="radio" name="size" value="S">
+                          <span class="size-label">Nhỏ</span>
+                          <span class="size-price">+0đ</span>
+                        </label>
+                        <label class="size-option active">
+                          <input type="radio" name="size" value="M" checked>
+                          <span class="size-label">Vừa</span>
+                          <span class="size-price">+0đ</span>
+                        </label>
+                        <label class="size-option">
+                          <input type="radio" name="size" value="L">
+                          <span class="size-label">Lớn</span>
+                          <span class="size-price">...</span>
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <!-- Order Summary -->
+              <div class="form-section">
+                <h4>Tóm tắt đơn hàng</h4>
+                <div class="order-summary">
+                  <div class="summary-item">
+                    <span>Đơn giá:</span>
+                    <span id="basePrice">0đ</span>
+                  </div>
+                  <div class="summary-item">
+                    <span>Phí size:</span>
+                    <span id="sizePrice">0đ</span>
+                  </div>
+                  <div class="summary-item">
+                    <span>Số lượng:</span>
+                    <span id="summaryQuantity">1</span>
+                  </div>
+                  <div class="summary-divider"></div>
+                  <div class="summary-total">
+                    <span>Tổng cộng:</span>
+                    <span id="totalPrice" class="total-price">0đ</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div class="form-actions">
+                <button type="submit" class="btn btn-order btn-lg">Thêm vào giỏ hàng</button>
+                <a href="menu.html" class="btn btn-secondary btn-lg">← Quay về thực đơn</a>
+              </div>
+            </form>
+>>>>>>> db8b244a84e9f5a8fddafc43aaa9f8a888cdf0f7
           </div>
         </div>
       </div>
