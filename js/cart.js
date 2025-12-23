@@ -54,8 +54,15 @@ function renderCart() {
   let total = 0;
 
   cart.forEach((item, idx) => {
-    const price = getItemPrice(item.name);
-    const itemTotal = price * item.quantity;
+    const basePrice = getItemPrice(item.name);
+    
+    // Calculate price based on size
+    let multiplier = 1;
+    if (item.size === 'S') multiplier = 0.9;
+    if (item.size === 'L') multiplier = 1.2;
+    
+    const unitPrice = Math.round(basePrice * multiplier);
+    const itemTotal = unitPrice * item.quantity;
     total += itemTotal;
 
     html += `
@@ -198,10 +205,18 @@ function handlePaymentSubmit(e) {
   let descriptionParts = [];
 
   cart.forEach(item => {
-    const itemPrice = getItemPrice(item.name);
-    const itemTotal = itemPrice * item.quantity;
+    const basePrice = getItemPrice(item.name);
+    
+    // Calculate price based on size
+    let multiplier = 1;
+    if (item.size === 'S') multiplier = 0.9;
+    if (item.size === 'L') multiplier = 1.2;
+    
+    const unitPrice = Math.round(basePrice * multiplier);
+    const itemTotal = unitPrice * item.quantity;
+    
     totalAmount += itemTotal;
-    descriptionParts.push(`${item.name} x${item.quantity}`);
+    descriptionParts.push(`${item.name} (${getSizeName(item.size)}) x${item.quantity}`);
   });
 
   const description = "Đơn hàng: " + descriptionParts.join(", ");

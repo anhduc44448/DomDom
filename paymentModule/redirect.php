@@ -162,6 +162,12 @@ if ($app_trans_id) {
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <?php if ($status == 'Thành công'): ?>
+  <script>
+      // Clear cart on successful payment
+      localStorage.removeItem("cart");
+  </script>
+  <?php endif; ?>
   <?php if ($order_details): ?>
   <script>
   function updateStatus() {
