@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Đặt hàng thành công - Đom đóm quán</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/order.css">
+    <style>
+        .success-icon {
+            font-size: 100px;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+
+        .order-details {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="logo.png" alt="Đom đóm quán" width="150">
+            </a>
+        </div>
+    </nav>
+
+    <div class="order-container">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="order-box text-center">
+                        <div class="success-icon">✅</div>
+
+                        <h2 class="mb-3">Đặt Hàng Thành Công!</h2>
+                        <p class="mb-4">Cảm ơn bạn đã đặt hàng tại Đom đóm quán</p>
+
+                        <div id="orderInfo" class="order-details">
+                            <h5>Thông tin đơn hàng</h5>
+                            <p class="mb-2">Mã đơn hàng: <strong id="orderId">#---</strong></p>
+                            <p class="mb-2">Trạng thái: <span class="badge bg-warning">Đang chuẩn bị</span></p>
+                            <p class="mb-2">Thời gian: <span id="orderTime"></span></p>
+                            <p class="mb-0">Nhân viên sẽ phục vụ tại bàn của bạn trong 15-20 phút</p>
+                        </div>
+
+                        <div class="action-buttons mt-4">
+                            <a href="index.html" class="btn btn-order me-3">Về trang chủ</a>
+                            <a href="menu.html" class="btn btn-secondary">Đặt thêm món</a>
+                        </div>
+
+                        <div class="mt-5">
+                            <h5>Hướng dẫn:</h5>
+                            <div class="text-start mt-3">
+                                <p>📞 <strong>Liên hệ hỗ trợ:</strong> 0236 1234 5678</p>
+                                <p>⏰ <strong>Thời gian phục vụ:</strong> 7:00 - 22:00 hàng ngày</p>
+                                <p>📍 <strong>Địa chỉ:</strong> Hòa Khánh Nam, Đà Nẵng</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Đom đóm quán</p>
+    </footer>
+
+    <script>
+        // Lấy thông tin từ URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const orderId = urlParams.get('order_id');
+
+        if (orderId) {
+            document.getElementById('orderId').textContent = '#' + orderId;
+
+            // Hiển thị thời gian hiện tại
+            const now = new Date();
+            const timeString = now.toLocaleString('vi-VN');
+            document.getElementById('orderTime').textContent = timeString;
+
+            // Xóa giỏ hàng trong localStorage
+            localStorage.removeItem('cart');
+        } else {
+            // Nếu không có order_id, chuyển về trang chủ
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 3000);
+        }
+    </script>
+</body>
+
+</html>

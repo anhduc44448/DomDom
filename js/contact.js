@@ -1,4 +1,17 @@
 // js/contact.js
+document.addEventListener("DOMContentLoaded", function () {
+  updateLoginButton();
+  document
+    .getElementById("loginBtn")
+    .addEventListener("click", handleLoginClick);
+  document
+    .getElementById("contactForm")
+    .addEventListener("submit", handleContactForm);
+  initFAQ();
+  initSmoothScroll();
+  updateCartCount();
+});
+
 function updateLoginButton() {
   const username = localStorage.getItem("username");
   const loginBtn = document.getElementById("loginBtn");
@@ -19,15 +32,27 @@ function handleLoginClick() {
     if (confirm("Bạn có chắc muốn đăng xuất không?")) {
       localStorage.removeItem("username");
       localStorage.removeItem("password");
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("user_id");
+      localStorage.removeItem("user_role");
       alert("Đã đăng xuất thành công!");
       updateLoginButton();
+      updateCartCount();
     }
   } else {
     window.location.href = "login.php";
   }
 }
 
-// Xử lý form liên hệ
+function updateCartCount() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cartCount = document.getElementById("cartCount");
+  if (cartCount) {
+    cartCount.textContent = cart.length;
+  }
+}
+
+// Contact form handling
 function handleContactForm(event) {
   event.preventDefault();
 
@@ -73,19 +98,18 @@ function handleContactForm(event) {
   }, 2000);
 }
 
-// Validate email
+// Validation functions
 function validateEmail(email) {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return re.test(email);
 }
 
-// Validate phone number (Vietnamese format)
 function validatePhone(phone) {
   const re = /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
   return re.test(phone.replace(/\s/g, ""));
 }
 
-// Show loading
+// Loading functions
 function showLoading() {
   const btn = document.querySelector(".btn-send");
   const originalText = btn.textContent;
@@ -94,14 +118,13 @@ function showLoading() {
   btn.disabled = true;
 }
 
-// Hide loading
 function hideLoading() {
   const btn = document.querySelector(".btn-send");
   btn.textContent = "Gửi tin nhắn";
   btn.disabled = false;
 }
 
-// FAQ accordion functionality
+// FAQ functionality
 function initFAQ() {
   const faqItems = document.querySelectorAll(".faq-item");
 
@@ -113,7 +136,7 @@ function initFAQ() {
   });
 }
 
-// Smooth scroll for navigation
+// Smooth scroll
 function initSmoothScroll() {
   const links = document.querySelectorAll('a[href^="#"]');
 
@@ -132,15 +155,3 @@ function initSmoothScroll() {
     });
   });
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-  updateLoginButton();
-  document
-    .getElementById("loginBtn")
-    .addEventListener("click", handleLoginClick);
-  document
-    .getElementById("contactForm")
-    .addEventListener("submit", handleContactForm);
-  initFAQ();
-  initSmoothScroll();
-});

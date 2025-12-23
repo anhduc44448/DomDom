@@ -1,4 +1,13 @@
 // js/about.js
+document.addEventListener("DOMContentLoaded", function () {
+  updateLoginButton();
+  document
+    .getElementById("loginBtn")
+    .addEventListener("click", handleLoginClick);
+  initScrollAnimations();
+  updateCartCount();
+});
+
 function updateLoginButton() {
   const username = localStorage.getItem("username");
   const loginBtn = document.getElementById("loginBtn");
@@ -19,15 +28,27 @@ function handleLoginClick() {
     if (confirm("Bạn có chắc muốn đăng xuất không?")) {
       localStorage.removeItem("username");
       localStorage.removeItem("password");
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("user_id");
+      localStorage.removeItem("user_role");
       alert("Đã đăng xuất thành công!");
       updateLoginButton();
+      updateCartCount();
     }
   } else {
     window.location.href = "login.php";
   }
 }
 
-// Hiệu ứng scroll cho section
+function updateCartCount() {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cartCount = document.getElementById("cartCount");
+  if (cartCount) {
+    cartCount.textContent = cart.length;
+  }
+}
+
+// Scroll animations
 function initScrollAnimations() {
   const sections = document.querySelectorAll(
     ".mission-section, .history-section, .values-section"
@@ -52,11 +73,3 @@ function initScrollAnimations() {
     observer.observe(section);
   });
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-  updateLoginButton();
-  document
-    .getElementById("loginBtn")
-    .addEventListener("click", handleLoginClick);
-  initScrollAnimations();
-});

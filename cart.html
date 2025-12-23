@@ -7,6 +7,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/cart.css">
+  <style>
+    .order-processing {
+      text-align: center;
+      padding: 30px;
+    }
+
+    .order-success {
+      text-align: center;
+      padding: 30px;
+      color: #28a745;
+    }
+  </style>
 </head>
 
 <body>
@@ -24,7 +36,8 @@
           <li class="nav-item"><a class="nav-link" href="about.html">Giới thiệu</a></li>
           <li class="nav-item"><a class="nav-link" href="menu.html">Thực đơn</a></li>
           <li class="nav-item"><a class="nav-link" href="contact.html">Liên hệ</a></li>
-          <li class="nav-item"><a class="nav-link active" href="cart.html">🛒 Giỏ hàng</a></li>
+          <li class="nav-item"><a class="nav-link active" href="cart.html">🛒 Giỏ hàng <span id="cartCount"
+                class="badge bg-danger">0</span></a></li>
         </ul>
       </div>
     </div>
@@ -32,78 +45,72 @@
 
   <button id="loginBtn" class="btn btn-primary">Đăng nhập</button>
 
-  <div class="container cart-container">
-    <h2 class="cart-title">Giỏ hàng của bạn</h2>
+  <div class="cart-container">
+    <div class="container">
+      <h1 class="cart-title">Giỏ Hàng</h1>
 
-    <div id="cartList" class="cart-list">
-      <!-- Giỏ hàng sẽ được hiển thị ở đây -->
-    </div>
-
-    <!-- Customer Info Form -->
-    <div id="customerForm" class="customer-info section-card" style="display: none;">
-      <h4>Thông tin giao hàng</h4>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="customerName">Tên người nhận *</label>
-            <input type="text" id="customerName" class="form-control" placeholder="Nhập tên người nhận" required>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="customerTable">Số bàn*</label>
-            <select id="customerTable" class="form-control" required>
-              <option value="">Chọn số bàn</option>
-              <option value="1">Bàn 1</option>
-              <option value="2">Bàn 2</option>
-              <option value="3">Bàn 3</option>
-              <option value="4">Bàn 4</option>
-              <option value="5">Bàn 5</option>
-              <option value="6">Bàn 6</option>
-              <option value="7">Bàn 7</option>
-              <option value="8">Bàn 8</option>
-              <option value="9">Bàn 9</option>
-              <option value="10">Bàn 10</option>
-              <option value="VIP-1">VIP 1</option>
-              <option value="VIP-2">VIP 2</option>
-              <option value="VIP-3">VIP 3</option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-12">
-          <div class="form-group">
-            <label for="customerNote">Ghi chú</label>
-            <textarea id="customerNote" class="form-control" rows="2" placeholder="Ghi chú đặc biệt (không bắt buộc)"></textarea>
-          </div>
+      <div id="cartContent">
+        <!-- Cart sẽ được render bằng JavaScript -->
+        <div id="cartList" class="cart-list"></div>
+        <div id="emptyCart" class="empty-cart text-center" style="display: none;">
+          <div class="empty-icon">🛒</div>
+          <h3>Giỏ hàng trống</h3>
+          <p>Hãy thêm món ngon vào giỏ hàng của bạn!</p>
+          <a href="menu.html" class="btn btn-order">Khám phá thực đơn</a>
         </div>
       </div>
-    </div>
 
-    <form id="paymentForm" action="paymentModule/payment.php" method="post">
-      <input type="hidden" name="amount" id="hiddenAmount">
-      <input type="hidden" name="description" id="hiddenDescription">
-      <input type="hidden" name="customer_data" id="hiddenCustomerData">
-      <div class="cart-summary">
-        <div class="row">
+      <!-- Customer Info Form -->
+      <div id="customerForm" class="customer-info" style="display: none;">
+        <h4>Thông tin khách hàng</h4>
+        <form id="customerInfoForm">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="customerName">Họ và tên *</label>
+                <input type="text" id="customerName" class="form-control" required>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="customerTable">Số bàn *</label>
+                <select id="customerTable" class="form-control" required>
+                  <option value="">Chọn số bàn</option>
+                  <option value="1">Bàn 1</option>
+                  <option value="2">Bàn 2</option>
+                  <option value="3">Bàn 3</option>
+                  <option value="4">Bàn 4</option>
+                  <option value="5">Bàn 5</option>
+                  <option value="6">Bàn 6</option>
+                  <option value="VIP-1">Bàn VIP 1</option>
+                  <option value="VIP-2">Bàn VIP 2</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="customerNote">Ghi chú (nếu có)</label>
+            <textarea id="customerNote" class="form-control" rows="3"
+              placeholder="Ví dụ: Ít đường, ít đá, không hành..."></textarea>
+          </div>
+        </form>
+      </div>
+
+      <!-- Order Summary -->
+      <div id="orderSummary" class="cart-summary" style="display: none;">
+        <div class="row align-items-center">
           <div class="col-md-6">
             <div class="total-section">
-              <h4>Tổng cộng: <span id="totalAmount">0đ</span></h4>
-              <p class="text-muted">Thanh toán qua Zalopay</p>
+              <h4>Tổng cộng:</h4>
+              <div id="totalAmount" class="total-amount">0đ</div>
             </div>
           </div>
           <div class="col-md-6 text-end">
-            <button type="submit" class="btn btn-order btn-lg" id="confirmOrderBtn">Xác nhận đặt hàng</button>
-            <a href="menu.html" class="btn btn-secondary btn-lg ms-3">← Tiếp tục mua hàng</a>
+            <button id="submitOrderBtn" class="btn btn-order btn-lg">Đặt hàng ngay</button>
+            <a href="menu.html" class="btn btn-secondary btn-lg ms-2">Thêm món</a>
           </div>
         </div>
       </div>
-    </form>
-
-    <div id="emptyCart" class="empty-cart text-center">
-      <div class="empty-icon">🛒</div>
-      <h3>Giỏ hàng của bạn đang trống</h3>
-      <p>Hãy khám phá thực đơn và thêm món ăn ngon vào giỏ hàng!</p>
-      <a href="menu.html" class="btn btn-order">Khám phá thực đơn</a>
     </div>
   </div>
 
@@ -112,7 +119,252 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/cart.js"></script>
+  <script>
+    let cart = [];
+
+    async function loadCart() {
+      cart = JSON.parse(localStorage.getItem('cart')) || [];
+      renderCart();
+      updateCartCount();
+    }
+
+    function renderCart() {
+      const cartList = document.getElementById('cartList');
+      const emptyCart = document.getElementById('emptyCart');
+      const customerForm = document.getElementById('customerForm');
+      const orderSummary = document.getElementById('orderSummary');
+
+      if (cart.length === 0) {
+        cartList.innerHTML = '';
+        cartList.style.display = 'none';
+        customerForm.style.display = 'none';
+        orderSummary.style.display = 'none';
+        emptyCart.style.display = 'block';
+        return;
+      }
+
+      let html = '';
+      let total = 0;
+
+      cart.forEach((item, index) => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+
+        html += `
+                    <div class="cart-item">
+                        <img src="${item.img}" alt="${item.name}" 
+                             onerror="this.src='database/AnhDoAn/BanhTranBo.jpg'">
+                        <div class="cart-details">
+                            <h5>${item.name}</h5>
+                            <div class="cart-info">Kích cỡ: <b>${getSizeName(item.size)}</b></div>
+                            <div class="cart-info">Số lượng: <b>${item.quantity}</b></div>
+                            <div class="cart-price">${formatPrice(itemTotal)}đ</div>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn" onclick="updateQuantity(${index}, -1)">-</button>
+                                <span class="quantity">${item.quantity}</span>
+                                <button class="quantity-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                            </div>
+                        </div>
+                        <button class="btn-remove" onclick="removeItem(${index})">Xóa</button>
+                    </div>
+                `;
+      });
+
+      cartList.innerHTML = html;
+      cartList.style.display = 'block';
+      customerForm.style.display = 'block';
+      orderSummary.style.display = 'block';
+      emptyCart.style.display = 'none';
+
+      document.getElementById('totalAmount').textContent = formatPrice(total) + 'đ';
+
+      // Auto fill customer name if logged in
+      const username = localStorage.getItem('username');
+      if (username && !document.getElementById('customerName').value) {
+        document.getElementById('customerName').value = username;
+      }
+    }
+
+    function getSizeName(size) {
+      const sizes = { S: "Nhỏ", M: "Vừa", L: "Lớn" };
+      return sizes[size] || size;
+    }
+
+    function formatPrice(price) {
+      return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+
+    function updateQuantity(index, change) {
+      cart[index].quantity += change;
+
+      if (cart[index].quantity < 1) {
+        cart[index].quantity = 1;
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+      updateCartCount();
+    }
+
+    function removeItem(index) {
+      if (confirm("Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng?")) {
+        cart.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        renderCart();
+        updateCartCount();
+      }
+    }
+
+    function updateCartCount() {
+      const cartCount = document.getElementById('cartCount');
+      if (cartCount) {
+        cartCount.textContent = cart.length;
+      }
+    }
+
+    async function submitOrder() {
+      // Validate form
+      const customerName = document.getElementById('customerName').value.trim();
+      const customerTable = document.getElementById('customerTable').value.trim();
+
+      if (!customerName) {
+        alert('Vui lòng nhập họ và tên');
+        document.getElementById('customerName').focus();
+        return;
+      }
+
+      if (!customerTable) {
+        alert('Vui lòng chọn số bàn');
+        document.getElementById('customerTable').focus();
+        return;
+      }
+
+      // Check login
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      if (!isLoggedIn) {
+        alert('Bạn cần đăng nhập để đặt hàng!');
+        window.location.href = 'login.php';
+        return;
+      }
+
+      const userId = localStorage.getItem('user_id');
+      const customerNote = document.getElementById('customerNote').value.trim();
+
+      // Prepare order data
+      const orderData = {
+        user_id: userId,
+        customer_name: customerName,
+        table_number: customerTable,
+        customer_note: customerNote,
+        items: cart.map(item => ({
+          product_name: item.name,
+          quantity: item.quantity,
+          size: item.size,
+          unit_price: item.price,
+          total_price: item.price * item.quantity
+        })),
+        total_amount: calculateTotal()
+      };
+
+      // Show loading
+      const submitBtn = document.getElementById('submitOrderBtn');
+      const originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Đang xử lý...';
+      submitBtn.disabled = true;
+
+      try {
+        const response = await fetch('api/create_order.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(orderData)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          // Clear cart
+          localStorage.removeItem('cart');
+          cart = [];
+
+          // Show success message
+          document.getElementById('cartContent').innerHTML = `
+                        <div class="order-success">
+                            <div style="font-size: 80px;">✅</div>
+                            <h3>Đặt hàng thành công!</h3>
+                            <p>Mã đơn hàng: <strong>#${result.order_id}</strong></p>
+                            <p>Nhân viên sẽ phục vụ tại bàn ${customerTable}</p>
+                            <div class="mt-4">
+                                <a href="index.html" class="btn btn-order">Về trang chủ</a>
+                                <a href="menu.html" class="btn btn-secondary">Đặt thêm món</a>
+                            </div>
+                        </div>
+                    `;
+
+          document.getElementById('customerForm').style.display = 'none';
+          document.getElementById('orderSummary').style.display = 'none';
+
+        } else {
+          throw new Error(result.message || 'Lỗi tạo đơn hàng');
+        }
+
+      } catch (error) {
+        alert('Lỗi: ' + error.message);
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
+      }
+    }
+
+    function calculateTotal() {
+      return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+    }
+
+    // Login button functions
+    function updateLoginButton() {
+      const username = localStorage.getItem('username');
+      const loginBtn = document.getElementById('loginBtn');
+
+      if (!loginBtn) return;
+
+      if (username) {
+        loginBtn.textContent = `👋 ${username} | Đăng xuất`;
+        loginBtn.classList.remove('btn-primary');
+        loginBtn.classList.add('btn-danger');
+      } else {
+        loginBtn.textContent = 'Đăng nhập';
+        loginBtn.classList.remove('btn-danger');
+        loginBtn.classList.add('btn-primary');
+      }
+    }
+
+    function handleLoginClick() {
+      const username = localStorage.getItem('username');
+
+      if (username) {
+        if (confirm('Bạn có chắc muốn đăng xuất không?')) {
+          localStorage.removeItem('username');
+          localStorage.removeItem('isLoggedIn');
+          localStorage.removeItem('user_id');
+          localStorage.removeItem('user_role');
+          alert('Đã đăng xuất thành công!');
+          updateLoginButton();
+          window.location.reload();
+        }
+      } else {
+        window.location.href = 'login.php';
+      }
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function () {
+      loadCart();
+      updateLoginButton();
+
+      document.getElementById('loginBtn').addEventListener('click', handleLoginClick);
+      document.getElementById('submitOrderBtn').addEventListener('click', submitOrder);
+    });
+  </script>
 </body>
 
 </html>
