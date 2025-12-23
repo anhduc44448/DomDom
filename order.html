@@ -1,381 +1,98 @@
 <!DOCTYPE html>
 <html lang="vi">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Đặt món - Đom đóm quán</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+		/>
+		<link rel="stylesheet" href="css/order.css" />
+		<style>
+			.product-loading {
+				text-align: center;
+				padding: 50px 0;
+			}
 
-<head>
-  <meta charset="UTF-8">
-  <title>Đặt món - Đom đóm quán</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/order.css">
-  <style>
-    .product-loading {
-      text-align: center;
-      padding: 50px 0;
-    }
+			.product-not-found {
+				text-align: center;
+				padding: 50px 0;
+				color: #dc3545;
+			}
+		</style>
+	</head>
 
-    .product-not-found {
-      text-align: center;
-      padding: 50px 0;
-      color: #dc3545;
-    }
-  </style>
-</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<div class="container">
+				<a class="navbar-brand" href="index.html">
+					<img src="logo.png" alt="Đom đóm quán" width="150" />
+				</a>
+				<button
+					class="navbar-toggler"
+					type="button"
+					data-bs-toggle="collapse"
+					data-bs-target="#navbarNav"
+				>
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav ms-auto">
+						<li class="nav-item">
+							<a class="nav-link" href="index.html">Trang chủ</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="about.html">Giới thiệu</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="menu.html">Thực đơn</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="contact.html">Liên hệ</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="cart.html">🛒 Giỏ hàng</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
 
-<body>
-  <nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container">
-      <a class="navbar-brand" href="index.html">
-        <img src="logo.png" alt="Đom đóm quán" width="150">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">Trang chủ</a></li>
-          <li class="nav-item"><a class="nav-link" href="about.html">Giới thiệu</a></li>
-          <li class="nav-item"><a class="nav-link" href="menu.html">Thực đơn</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.html">Liên hệ</a></li>
-          <li class="nav-item"><a class="nav-link" href="cart.html">🛒 Giỏ hàng</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+		<button id="loginBtn" class="btn btn-primary">Đăng nhập</button>
 
-  <button id="loginBtn" class="btn btn-primary">Đăng nhập</button>
+		<div class="order-container">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-lg-8">
+						<div class="order-box">
+							<div id="orderContent">
+								<div class="product-loading">
+									<div
+										class="spinner-border text-warning"
+										role="status"
+									>
+										<span class="visually-hidden"
+											>Loading...</span
+										>
+									</div>
+									<p class="mt-2">
+										Đang tải thông tin sản phẩm...
+									</p>
+								</div>
+							</div>
 
-  <div class="order-container">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <div class="order-box">
-            <div id="orderContent">
-              <div class="product-loading">
-                <div class="spinner-border text-warning" role="status">
-                  <span class="visually-hidden">Loading...</span>
-                </div>
-                <p class="mt-2">Đang tải thông tin sản phẩm...</p>
-              </div>
-            </div>
-<<<<<<< HEAD
-=======
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-            <form id="orderForm" class="order-form">
-              <!-- Quantity & Size -->
-              <div class="form-section">
-                <h4>Thông tin món</h4>
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="mb-3">
-                      <label for="quantity" class="form-label">Số lượng</label>
-                      <div class="quantity-control">
-                        <button type="button" class="quantity-btn" id="decreaseQty">-</button>
-                        <input type="number" class="form-control" id="quantity" value="1" min="1" max="10">
-                        <button type="button" class="quantity-btn" id="increaseQty">+</button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <div class="mb-3">
-                      <label class="form-label">Kích cỡ</label>
-                      <div class="size-options">
-                        <label class="size-option">
-                          <input type="radio" name="size" value="S">
-                          <span class="size-label">Nhỏ</span>
-                          <span class="size-price">+0đ</span>
-                        </label>
-                        <label class="size-option active">
-                          <input type="radio" name="size" value="M" checked>
-                          <span class="size-label">Vừa</span>
-                          <span class="size-price">+0đ</span>
-                        </label>
-                        <label class="size-option">
-                          <input type="radio" name="size" value="L">
-                          <span class="size-label">Lớn</span>
-                          <span class="size-price">...</span>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+		<footer>
+			<p>&copy; 2024 Đom đóm quán</p>
+		</footer>
 
-
-
-              <!-- Order Summary -->
-              <div class="form-section">
-                <h4>Tóm tắt đơn hàng</h4>
-                <div class="order-summary">
-                  <div class="summary-item">
-                    <span>Đơn giá:</span>
-                    <span id="basePrice">0đ</span>
-                  </div>
-                  <div class="summary-item">
-                    <span>Phí size:</span>
-                    <span id="sizePrice">0đ</span>
-                  </div>
-                  <div class="summary-item">
-                    <span>Số lượng:</span>
-                    <span id="summaryQuantity">1</span>
-                  </div>
-                  <div class="summary-divider"></div>
-                  <div class="summary-total">
-                    <span>Tổng cộng:</span>
-                    <span id="totalPrice" class="total-price">0đ</span>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Action Buttons -->
-              <div class="form-actions">
-                <button type="submit" class="btn btn-order btn-lg">Thêm vào giỏ hàng</button>
-                <a href="menu.html" class="btn btn-secondary btn-lg">← Quay về thực đơn</a>
-              </div>
-            </form>
->>>>>>> db8b244a84e9f5a8fddafc43aaa9f8a888cdf0f7
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <footer>
-    <p>&copy; 2024 Đom đóm quán</p>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    async function loadProduct() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const productId = urlParams.get('id');
-
-      if (!productId) {
-        showProductNotFound();
-        return;
-      }
-
-      try {
-        const response = await fetch(`api/get_product_by_id.php?id=${productId}`);
-        const result = await response.json();
-
-        if (result.success) {
-          displayProduct(result.data);
-        } else {
-          showProductNotFound();
-        }
-      } catch (error) {
-        console.error('Lỗi tải sản phẩm:', error);
-        showProductNotFound();
-      }
-    }
-
-    function displayProduct(product) {
-      const price = formatPrice(product.price);
-      const imageUrl = product.image_path || 'database/AnhDoAn/BanhTranBo.jpg';
-
-      const html = `
-                <div class="order-header">
-                    <h2>Đặt món: <span class="item-name">${product.name}</span></h2>
-                    <div class="item-image">
-                        <img src="${imageUrl}" alt="${product.name}" 
-                             onerror="this.src='database/AnhDoAn/BanhTranBo.jpg'">
-                    </div>
-                </div>
-
-                <form id="orderForm" class="order-form">
-                    <!-- Quantity & Size -->
-                    <div class="form-section">
-                        <h4>Thông tin món</h4>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label for="quantity" class="form-label">Số lượng</label>
-                                    <div class="quantity-control">
-                                        <button type="button" class="quantity-btn" id="decreaseQty">-</button>
-                                        <input type="number" class="form-control" id="quantity" value="1" min="1" max="10">
-                                        <button type="button" class="quantity-btn" id="increaseQty">+</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="mb-3">
-                                    <label class="form-label">Kích cỡ</label>
-                                    <div class="size-options">
-                                        <label class="size-option">
-                                            <input type="radio" name="size" value="S">
-                                            <span class="size-label">Nhỏ</span>
-                                            <span class="size-price">+0đ</span>
-                                        </label>
-                                        <label class="size-option active">
-                                            <input type="radio" name="size" value="M" checked>
-                                            <span class="size-label">Vừa</span>
-                                            <span class="size-price">+0đ</span>
-                                        </label>
-                                        <label class="size-option">
-                                            <input type="radio" name="size" value="L">
-                                            <span class="size-label">Lớn</span>
-                                            <span class="size-price">+5.000đ</span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Order Summary -->
-                    <div class="form-section">
-                        <h4>Tóm tắt đơn hàng</h4>
-                        <div class="order-summary">
-                            <div class="summary-item">
-                                <span>Đơn giá:</span>
-                                <span id="basePrice">${price}đ</span>
-                            </div>
-                            <div class="summary-item">
-                                <span>Phí size:</span>
-                                <span id="sizePrice">0đ</span>
-                            </div>
-                            <div class="summary-item">
-                                <span>Số lượng:</span>
-                                <span id="summaryQuantity">1</span>
-                            </div>
-                            <div class="summary-divider"></div>
-                            <div class="summary-total">
-                                <span>Tổng cộng:</span>
-                                <span id="totalPrice" class="total-price">${price}đ</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Action Buttons -->
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-order btn-lg">Thêm vào giỏ hàng</button>
-                        <a href="menu.html" class="btn btn-secondary btn-lg">← Quay về thực đơn</a>
-                    </div>
-                </form>
-            `;
-
-      document.getElementById('orderContent').innerHTML = html;
-      initOrderControls(product);
-    }
-
-    function showProductNotFound() {
-      document.getElementById('orderContent').innerHTML = `
-                <div class="product-not-found">
-                    <h3>Không tìm thấy sản phẩm</h3>
-                    <p>Sản phẩm bạn tìm kiếm không tồn tại hoặc đã bị xóa.</p>
-                    <a href="menu.html" class="btn btn-primary">Quay về thực đơn</a>
-                </div>
-            `;
-    }
-
-    function initOrderControls(product) {
-      const basePrice = product.price;
-      let currentQuantity = 1;
-      let currentSize = 'M';
-
-      // Quantity controls
-      const quantityInput = document.getElementById('quantity');
-      const decreaseBtn = document.getElementById('decreaseQty');
-      const increaseBtn = document.getElementById('increaseQty');
-
-      decreaseBtn.addEventListener('click', () => {
-        if (currentQuantity > 1) {
-          currentQuantity--;
-          quantityInput.value = currentQuantity;
-          updateTotalPrice();
-        }
-      });
-
-      increaseBtn.addEventListener('click', () => {
-        if (currentQuantity < 10) {
-          currentQuantity++;
-          quantityInput.value = currentQuantity;
-          updateTotalPrice();
-        }
-      });
-
-      quantityInput.addEventListener('change', function () {
-        let value = parseInt(this.value);
-        if (value < 1) this.value = 1;
-        if (value > 10) this.value = 10;
-        currentQuantity = parseInt(this.value);
-        updateTotalPrice();
-      });
-
-      // Size selection
-      const sizeOptions = document.querySelectorAll('.size-option');
-      sizeOptions.forEach(option => {
-        option.addEventListener('click', function () {
-          sizeOptions.forEach(opt => opt.classList.remove('active'));
-          this.classList.add('active');
-          this.querySelector('input[type="radio"]').checked = true;
-          currentSize = this.querySelector('input[type="radio"]').value;
-          updateTotalPrice();
-        });
-      });
-
-      // Form submission
-      const orderForm = document.getElementById('orderForm');
-      orderForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        addToCart(product);
-      });
-
-      function updateTotalPrice() {
-        const sizeMultiplier = currentSize === 'L' ? 1.2 : 1;
-        const sizeExtra = currentSize === 'L' ? basePrice * 0.2 : 0;
-        const total = (basePrice * sizeMultiplier) * currentQuantity;
-
-        document.getElementById('basePrice').textContent = formatPrice(basePrice) + 'đ';
-        document.getElementById('sizePrice').textContent = formatPrice(sizeExtra * currentQuantity) + 'đ';
-        document.getElementById('summaryQuantity').textContent = currentQuantity;
-        document.getElementById('totalPrice').textContent = formatPrice(total) + 'đ';
-      }
-
-      updateTotalPrice();
-    }
-
-    function addToCart(product) {
-      const quantity = parseInt(document.getElementById('quantity').value);
-      const size = document.querySelector('input[name="size"]:checked').value;
-      const basePrice = product.price;
-      const sizeMultiplier = size === 'L' ? 1.2 : 1;
-      const total = (basePrice * sizeMultiplier) * quantity;
-
-      const cartItem = {
-        product_id: product.id,
-        name: product.name,
-        img: product.image_path || 'database/AnhDoAn/BanhTranBo.jpg',
-        quantity: quantity,
-        size: size,
-        price: basePrice,
-        total: total,
-        addedAt: new Date().toISOString()
-      };
-
-      // Lấy giỏ hàng hiện tại
-      const cart = JSON.parse(localStorage.getItem('cart')) || [];
-      cart.push(cartItem);
-      localStorage.setItem('cart', JSON.stringify(cart));
-
-      // Hiển thị thông báo
-      alert(`✅ Đã thêm ${product.name} vào giỏ hàng!`);
-
-      // Chuyển về trang menu sau 1 giây
-      setTimeout(() => {
-        window.location.href = 'menu.html';
-      }, 1000);
-    }
-
-    function formatPrice(price) {
-      return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    }
-
-    // Load product khi trang load
-    document.addEventListener('DOMContentLoaded', function () {
-      loadProduct();
-    });
-  </script>
-</body>
-
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="js/order.js"></script>
+	</body>
 </html>

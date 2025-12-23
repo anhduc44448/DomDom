@@ -142,6 +142,7 @@ $best_sellers = $conn->query("
                                                 <span class="status status-<?php echo $order['status']; ?>">
                                                     <?php
                                                     $status_text = [
+                                                        'pending' => 'Chờ xử lý',
                                                         'preparing' => 'Đang chuẩn bị',
                                                         'completed' => 'Hoàn thành',
                                                         'cancelled' => 'Đã hủy'
